@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ајМајсторе</string>
+    <string name="action_settings">Подесувања</string>
+    <string name="backgroundLogoDesc">ајМајсторе Лого</string>
+    <string name="btn_link_to_login">Веќе сте се регистрирале! Најавете се!</string>
+    <string name="btn_link_to_register">Немате профил? Регистрирајте се сега.</string>
+    <string name="btn_login">Најави се</string>
+    <string name="btn_register">Регидтрирај се</string>
+    <string name="category_appliances">Бела техника</string>
+    <string name="category_cars">Автомобили</string>
+    <string name="category_construction">Градежништво</string>
+    <string name="category_food">Храна</string>
+    <string name="category_logout">Одјава</string>
+    <string name="category_other">Разно</string>
+    <string name="category_settings">Подесувања</string>
+    <string name="category_settings_title">Подесувања</string>
+    <string name="category_style">Стил</string>
+    <string name="defaultUSerImageDesc">Слика</string>
+    <string name="dwnl_update_title">Превземање на нова верзија &#8230;</string>
+    <string name="hint_login_username">Корисничко име</string>
+    <string name="hint_password">Лозинка</string>
+    <string name="hint_register_email">Емаил</string>
+    <string name="hint_register_username">Корисничко име</string>
+    <string name="login_title">ајМајсторе - Најава</string>
+    <string name="login_title_description">Добредојдовте во апликацијата ајМајсторе. Ве молиме најавете се на Вашиот профил !</string>
+    <string name="txtview_img_hint">(Одберете слика на профилот)</string>
+    <string name="txtview_title">Кориснички профил</string>
+    <string name="catecategory_technology">Технологија</string>
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/category_construction"
+            android:icon="@mipmap/ic_format_paint_black_24dp"
+            android:title="@string/category_construction" />
+        <item
+            android:id="@+id/category_appliances"
+            android:icon="@mipmap/ic_kitchen_black_24dp"
+            android:title="@string/category_appliances" />
+        <item
+            android:id="@+id/category_cars"
+            android:icon="@mipmap/ic_directions_car_black_24dp"
+            android:title="@string/category_cars" />
+        <item
+            android:id="@+id/category_food"
+            android:icon="@mipmap/ic_free_breakfast_black_24dp"
+            android:title="@string/category_food" />
+        <item
+            android:id="@+id/category_technology"
+            android:icon="@mipmap/ic_computer_black_24dp"
+            android:title="@string/catecategory_technology" />
+        <item
+            android:id="@+id/category_style"
+            android:icon="@mipmap/ic_face_black_24dp"
+            android:title="@string/category_style" />
+        <item
+            android:id="@+id/category_other"
+            android:icon="@mipmap/ic_help_black_24dp"
+            android:title="@string/category_other" />
+    </group>
+
+    <item android:title="@string/category_settings_title">
+        <menu>
+            <item
+                android:id="@+id/category_settings"
+                android:icon="@mipmap/ic_settings_black_24dp"
+                android:title="@string/category_settings" />
+            <item
+                android:id="@+id/category_logout"
+                android:icon="@mipmap/ic_exit_to_app_black_24dp"
+                android:title="@string/category_logout" />
+        </menu>
+    </item>
+
+</menu>
