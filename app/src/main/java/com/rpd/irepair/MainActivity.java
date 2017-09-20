@@ -3,6 +3,7 @@ package com.rpd.irepair;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity
     SharedPreferences mPrefs;
     Boolean logedIn = false;
     Context context;
+
+    //Category navigationVIew
+    NavigationView categoryNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +59,24 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        //Lefat side drawer
+        //Left side drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        categoryNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu m = categoryNavigationView.getMenu();
+        m.add(
+                R.id.category_group, // groupId
+                0, // itemId
+                1, // order
+                "Purple" // title
+        );
+        categoryNavigationView.inflateMenu(R.menu.categories);
+
+        categoryNavigationView.setNavigationItemSelectedListener(this);
 
         //End of Initializing
 
@@ -90,6 +104,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+    //Create menu in the top right corner (Settings)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -97,6 +113,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //OnClick listener for top right corner (Settings) menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -112,25 +129,45 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+    //onClick listener for category selection
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        TextView testText = (TextView)findViewById(R.id.testText);
+        //Get strings.xml resource
+        Resources res = getResources();
+
+
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.category_construction) {
+            testText.setText(res.getString(R.string.category_construction));
+            categoryNavigationView.getMenu().clear();
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.category_appliances) {
+            testText.setText(res.getString(R.string.category_appliances));
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.category_cars) {
+            testText.setText(res.getString(R.string.category_cars));
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.category_food) {
+            testText.setText(res.getString(R.string.category_food));
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.category_technology) {
+            testText.setText(res.getString(R.string.catecategory_technology));
+
+        } else if (id == R.id.category_style) {
+            testText.setText(res.getString(R.string.category_style));
+
+        } else if (id == R.id.category_other) {
+            testText.setText(res.getString(R.string.category_other));
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         //drawer.closeDrawer(GravityCompat.START);
