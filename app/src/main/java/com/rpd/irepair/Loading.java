@@ -127,6 +127,8 @@ public class Loading extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast toast = Toast.makeText(context, "Error getting update !", Toast.LENGTH_LONG);
                 toast.show();
+
+
             }
         });
 
@@ -171,7 +173,7 @@ public class Loading extends AppCompatActivity {
 
             //Version is up to date, continue...
             versionUpToDate();
-        };
+        }
     }
 
     private void versionUpToDate() {
