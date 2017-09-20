@@ -41,7 +41,8 @@
             android:orderInCategory="7"/>
     </group>
 
-    <item android:title="@string/category_settings_title">
+    <item android:title="@string/category_settings_title"
+        android:orderInCategory="997">
         <menu>
             <item
                 android:id="@+id/category_settings"

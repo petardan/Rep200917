@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         m.add(
                 R.id.category_group, // groupId
                 0, // itemId
-                1, // order
+                2, // order
                 "Purple" // title
         );
         categoryNavigationView.inflateMenu(R.menu.categories);
