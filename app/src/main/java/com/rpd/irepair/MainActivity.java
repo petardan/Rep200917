@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,9 +31,18 @@ public class MainActivity extends AppCompatActivity
 
     //Category navigationVIew
     NavigationView categoryNavigationView;
+    Menu navigationDrawerMenu;
+
+    ArrayList<Profession> professions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Getting the professions list from Loading.class
+        DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("PROFESSIONS");
+        Bundle receive = getIntent().getExtras();
+        professions = dw.getParliaments();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -58,7 +69,6 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-
         //Left side drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -67,13 +77,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         categoryNavigationView = (NavigationView) findViewById(R.id.nav_view);
-        Menu m = categoryNavigationView.getMenu();
-        m.add(
-                R.id.category_group, // groupId
-                0, // itemId
-                2, // order
-                "Purple" // title
-        );
+        navigationDrawerMenu = categoryNavigationView.getMenu();
+
+        addAllProfessionsToDrawer(professions);
         categoryNavigationView.inflateMenu(R.menu.categories);
 
         categoryNavigationView.setNavigationItemSelectedListener(this);
@@ -81,6 +87,17 @@ public class MainActivity extends AppCompatActivity
         //End of Initializing
 
         checkIfUserIslogged();
+    }
+
+    private void addAllProfessionsToDrawer(ArrayList<Profession> professions) {
+
+
+        for(int i=0; i<professions.size(); i++){
+            navigationDrawerMenu.add(R.id.category_group, professions.get(i).getId(), professions.get(i).getCategoryId()+1, professions.get(i).getName().toString());
+            MenuItem menuItem = navigationDrawerMenu.getItem(i);
+            menuItem.setVisible(false);
+        }
+
     }
 
     private void checkIfUserIslogged() {
@@ -142,30 +159,29 @@ public class MainActivity extends AppCompatActivity
         Resources res = getResources();
 
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.category_construction) {
+        if (id == R.id.category_construction) {
             testText.setText(res.getString(R.string.category_construction));
-            categoryNavigationView.getMenu().clear();
+            for(int i=0; i<professions.size(); i++){
+                MenuItem menuItem = navigationDrawerMenu.getItem(i);
+                if((professions.get(i).getCategoryId()==item.getOrder())&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+
+            }
+            //categoryNavigationView.getMenu().clear();
 
         } else if (id == R.id.category_appliances) {
             testText.setText(res.getString(R.string.category_appliances));
-
         } else if (id == R.id.category_cars) {
             testText.setText(res.getString(R.string.category_cars));
-
         } else if (id == R.id.category_food) {
             testText.setText(res.getString(R.string.category_food));
-
         } else if (id == R.id.category_technology) {
             testText.setText(res.getString(R.string.catecategory_technology));
-
         } else if (id == R.id.category_style) {
             testText.setText(res.getString(R.string.category_style));
-
         } else if (id == R.id.category_other) {
             testText.setText(res.getString(R.string.category_other));
-
         }
 
 

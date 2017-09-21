@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Loading extends AppCompatActivity {
 
@@ -42,6 +43,8 @@ public class Loading extends AppCompatActivity {
 
     //Current version
     Float currentVersion;
+
+    ArrayList<Profession> professions;
 
 
     @Override
@@ -62,6 +65,8 @@ public class Loading extends AppCompatActivity {
         //Define elements
         backgroundLogo = (ImageView)findViewById(R.id.backgroundLogo);
         title = (TextView)findViewById(R.id.title);
+
+        professions = getProfessions();
 
 
         //Start animation
@@ -128,6 +133,12 @@ public class Loading extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, "Error getting update !", Toast.LENGTH_LONG);
                 toast.show();
 
+                //For testing purposes - move on
+                Intent i = new Intent(Loading.this, MainActivity.class);
+                i.putExtra("PROFESSIONS", new DataWrapper(professions));
+                startActivity(i);
+                finish();
+
 
             }
         });
@@ -146,6 +157,12 @@ public class Loading extends AppCompatActivity {
         else{
             Toast toast = Toast.makeText(context, "Error getting update !", Toast.LENGTH_LONG);
             toast.show();
+
+            //For testing purposes - move on
+            Intent i = new Intent(Loading.this, MainActivity.class);
+            i.putExtra("PROFESSIONS", new DataWrapper(professions));
+            startActivity(i);
+            finish();
         }
 
     }
@@ -177,9 +194,27 @@ public class Loading extends AppCompatActivity {
     }
 
     private void versionUpToDate() {
+
         Intent i = new Intent(Loading.this, MainActivity.class);
+        i.putExtra("PROFESSIONS", new DataWrapper(professions));
         startActivity(i);
         finish();
+    }
+
+    private ArrayList<Profession> getProfessions() {
+
+        //Create dummy professions for testing purposes
+        ArrayList<Profession> professions = new ArrayList<Profession>();
+        Profession profession1 = new Profession(1,100, "profession1", "prof1_desc");
+        Profession profession2 = new Profession(2,100, "profession2", "prof2_desc");
+        Profession profession3 = new Profession(3,200, "profession3", "prof3_desc");
+        Profession profession4 = new Profession(4,200, "profession4", "prof4_desc");
+
+        professions.add(profession1);
+        professions.add(profession2);
+        professions.add(profession3);
+        professions.add(profession4);
+        return professions;
     }
 
 
