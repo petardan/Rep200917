@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -154,17 +155,24 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        TextView testText = (TextView)findViewById(R.id.testText);
+        final TextView testText = (TextView)findViewById(R.id.testText);
         //Get strings.xml resource
         Resources res = getResources();
+
+        //Set default menu item from the professions - first profession
+        MenuItem menuItem = navigationDrawerMenu.findItem(professions.get(0).getId());;
 
 
         if (id == R.id.category_construction) {
             testText.setText(res.getString(R.string.category_construction));
+
             for(int i=0; i<professions.size(); i++){
-                MenuItem menuItem = navigationDrawerMenu.getItem(i);
-                if((professions.get(i).getCategoryId()==item.getOrder())&&(!menuItem.isVisible())){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
                     menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
                 }
 
             }
@@ -172,21 +180,92 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.category_appliances) {
             testText.setText(res.getString(R.string.category_appliances));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_cars) {
             testText.setText(res.getString(R.string.category_cars));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_food) {
             testText.setText(res.getString(R.string.category_food));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_technology) {
             testText.setText(res.getString(R.string.catecategory_technology));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_style) {
             testText.setText(res.getString(R.string.category_style));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_other) {
             testText.setText(res.getString(R.string.category_other));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
+
+            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    Log.d("Menu Item", menuItem.getTitle().toString() + " " + Integer.valueOf(menuItem.getOrder()).toString());
+
+                    testText.setText(menuItem.getTitle().toString());
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+                    return true;
+                }
+            });
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }
