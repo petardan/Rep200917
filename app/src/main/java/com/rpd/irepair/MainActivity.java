@@ -1,9 +1,11 @@
 package com.rpd.irepair;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -154,17 +156,24 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        TextView testText = (TextView)findViewById(R.id.testText);
+        final TextView testText = (TextView)findViewById(R.id.testText);
         //Get strings.xml resource
         Resources res = getResources();
+
+        //Set default menu item from the professions - first profession
+        MenuItem menuItem = navigationDrawerMenu.findItem(professions.get(0).getId());;
 
 
         if (id == R.id.category_construction) {
             testText.setText(res.getString(R.string.category_construction));
+
             for(int i=0; i<professions.size(); i++){
-                MenuItem menuItem = navigationDrawerMenu.getItem(i);
-                if((professions.get(i).getCategoryId()==item.getOrder())&&(!menuItem.isVisible())){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
                     menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
                 }
 
             }
@@ -172,21 +181,96 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.category_appliances) {
             testText.setText(res.getString(R.string.category_appliances));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_cars) {
             testText.setText(res.getString(R.string.category_cars));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_food) {
             testText.setText(res.getString(R.string.category_food));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_technology) {
             testText.setText(res.getString(R.string.catecategory_technology));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_style) {
             testText.setText(res.getString(R.string.category_style));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
         } else if (id == R.id.category_other) {
             testText.setText(res.getString(R.string.category_other));
+            for(int i=0; i<professions.size(); i++){
+                menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
+                if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
+                    menuItem.setVisible(true);
+                }
+                else{
+                    menuItem.setVisible(false);
+                }
+
+            }
+
+        } else {
+            setActionBarSubtitle(item.getTitle().toString());
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //drawer.closeDrawer(GravityCompat.START);
+
         return true;
+    }
+
+    //Setting Action Bar title and subtitle
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void setActionBarSubtitle(String subtitle) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            android.support.v7.app.ActionBar ab = getSupportActionBar();
+            ab.setTitle("iRepair");
+            ab.setSubtitle(subtitle);
+        }
     }
 }
