@@ -1,14 +1,15 @@
 package com.rpd.irepair;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -251,21 +252,25 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    Log.d("Menu Item", menuItem.getTitle().toString() + " " + Integer.valueOf(menuItem.getOrder()).toString());
+        } else {
+            setActionBarSubtitle(item.getTitle().toString());
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
 
-                    testText.setText(menuItem.getTitle().toString());
-                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                    drawer.closeDrawer(GravityCompat.START);
-                    return true;
-                }
-            });
         }
 
 
 
         return true;
+    }
+
+    //Setting Action Bar title and subtitle
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void setActionBarSubtitle(String subtitle) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            android.support.v7.app.ActionBar ab = getSupportActionBar();
+            ab.setTitle("iRepair");
+            ab.setSubtitle(subtitle);
+        }
     }
 }
