@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.rpd.datawrappers.DataWrapperProfessions;
+import com.rpd.datawrappers.DataWrapperRegions;
 import com.rpd.volley.AppController;
 
 import org.json.JSONException;
@@ -45,6 +47,7 @@ public class Loading extends AppCompatActivity {
     Float currentVersion;
 
     ArrayList<Profession> professions;
+    ArrayList<Region> regions;
 
 
     @Override
@@ -67,6 +70,7 @@ public class Loading extends AppCompatActivity {
         title = (TextView)findViewById(R.id.title);
 
         professions = getProfessions();
+        regions = getRegions();
 
 
         //Start animation
@@ -84,6 +88,7 @@ public class Loading extends AppCompatActivity {
 
 
     }
+
 
     //Start checking if update is needed
     private void checkingForUpdate() {
@@ -135,7 +140,8 @@ public class Loading extends AppCompatActivity {
 
                 //For testing purposes - move on
                 Intent i = new Intent(Loading.this, MainActivity.class);
-                i.putExtra("PROFESSIONS", new DataWrapper(professions));
+                i.putExtra("PROFESSIONS", new DataWrapperProfessions(professions));
+                i.putExtra("REGIONS", new DataWrapperRegions(regions));
                 startActivity(i);
                 finish();
 
@@ -160,7 +166,8 @@ public class Loading extends AppCompatActivity {
 
             //For testing purposes - move on
             Intent i = new Intent(Loading.this, MainActivity.class);
-            i.putExtra("PROFESSIONS", new DataWrapper(professions));
+            i.putExtra("PROFESSIONS", new DataWrapperProfessions(professions));
+            i.putExtra("REGIONS", new DataWrapperRegions(regions));
             startActivity(i);
             finish();
         }
@@ -196,7 +203,8 @@ public class Loading extends AppCompatActivity {
     private void versionUpToDate() {
 
         Intent i = new Intent(Loading.this, MainActivity.class);
-        i.putExtra("PROFESSIONS", new DataWrapper(professions));
+        i.putExtra("PROFESSIONS", new DataWrapperProfessions(professions));
+        i.putExtra("REGIONS", new DataWrapperRegions(regions));
         startActivity(i);
         finish();
     }
@@ -216,6 +224,23 @@ public class Loading extends AppCompatActivity {
         professions.add(profession4);
         return professions;
     }
+
+    private ArrayList<Region> getRegions() {
+
+        //Create dummy regions  for testing purposes
+        ArrayList<Region> regions = new ArrayList<Region>();
+        Region region1 = new Region(1, "Region1", "Skopje");
+        Region region2 = new Region(2, "Region2", "Skopje");
+        Region region3 = new Region(3, "Region3", "Ohrid");
+        Region region4 = new Region(4, "Region4", "Bitola");
+
+        regions.add(region1);
+        regions.add(region2);
+        regions.add(region3);
+        regions.add(region4);
+        return regions;
+    }
+
 
 
     private void startAnimation() {
