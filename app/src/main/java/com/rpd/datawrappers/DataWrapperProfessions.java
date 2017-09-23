@@ -1,4 +1,6 @@
-package com.rpd.irepair;
+package com.rpd.datawrappers;
+
+import com.rpd.irepair.Profession;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,11 +9,11 @@ import java.util.ArrayList;
  * Created by Petar on 9/21/2017.
  */
 
-public class DataWrapper implements Serializable {
+public class DataWrapperProfessions implements Serializable {
 
     private ArrayList<Profession> professions;
 
-    public DataWrapper(ArrayList<Profession> data) {
+    public DataWrapperProfessions(ArrayList<Profession> data) {
         this.professions = data;
     }
 
