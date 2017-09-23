@@ -19,7 +19,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.TextView;
+
+import com.rpd.customViews.smallRepairmanItem;
+import com.rpd.datawrappers.DataWrapperProfessions;
+import com.rpd.datawrappers.DataWrapperRegions;
 
 import java.util.ArrayList;
 
@@ -35,15 +42,24 @@ public class MainActivity extends AppCompatActivity
     NavigationView categoryNavigationView;
     Menu navigationDrawerMenu;
 
+    //Define list of professions, regions and repairmans, for testing purpose
     ArrayList<Profession> professions;
+    ArrayList<Region> regions;
+    ArrayList<Repairman> repairmans;
+
+    //Grid layout for the repairman list
+    GridLayout repairmanList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //Getting the professions list from Loading.class
-        DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("PROFESSIONS");
+        DataWrapperProfessions dw = (DataWrapperProfessions) getIntent().getSerializableExtra("PROFESSIONS");
+        DataWrapperRegions dwReg = (DataWrapperRegions) getIntent().getSerializableExtra("REGIONS");
+
         Bundle receive = getIntent().getExtras();
         professions = dw.getParliaments();
+        regions = dwReg.getParliaments();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -86,9 +102,63 @@ public class MainActivity extends AppCompatActivity
 
         categoryNavigationView.setNavigationItemSelectedListener(this);
 
+        repairmanList = (GridLayout)findViewById(R.id.repairmen_list);
         //End of Initializing
 
+
+        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
+        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
+        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
+        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
+        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
+        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
+
+
+        repairmans = getRepairmans();
+
         checkIfUserIslogged();
+    }
+
+    private ArrayList<Repairman> getRepairmans() {
+        ArrayList<Repairman> repairmans = new ArrayList<Repairman>();
+
+        ArrayList<Region> rep1reg = new ArrayList<Region>();
+        rep1reg.add(regions.get(0));
+        rep1reg.add(regions.get(1));
+        ArrayList<Profession> rep1prof = new ArrayList<Profession>();
+        rep1prof.add(professions.get(0));
+        rep1prof.add(professions.get(1));
+        Repairman repairman1 = new Repairman(1, "Rep", "1", "rep1@rep.com", "Addr1", "111", "112", "First repairman", 4.7 , rep1reg, rep1prof, "www.rep1.com/url" );
+
+        ArrayList<Region> rep2reg = new ArrayList<Region>();
+        rep2reg.add(regions.get(2));
+        ArrayList<Profession> rep2prof = new ArrayList<Profession>();
+        rep2prof.add(professions.get(0));
+        Repairman repairman2 = new Repairman(2, "Rep", "2", "rep2@rep.com", "Addr2", "221", "222", "Second repairman", 3.7 , rep2reg, rep2prof, "www.rep2.com/url" );
+
+        ArrayList<Region> rep3reg = new ArrayList<Region>();
+        rep3reg.add(regions.get(2));
+        ArrayList<Profession> rep3prof = new ArrayList<Profession>();
+        rep3prof.add(professions.get(0));
+        rep3prof.add(professions.get(2));
+        Repairman repairman3 = new Repairman(3, "Rep", "3", "rep3@rep.com", "Addr3", "331", "332", "Third repairman", 2.7 , rep3reg, rep3prof, "www.rep3.com/url" );
+
+        ArrayList<Region> rep4reg = new ArrayList<Region>();
+        rep4reg.add(regions.get(0));
+        rep4reg.add(regions.get(1));
+        ArrayList<Profession> rep4prof = new ArrayList<Profession>();
+        rep4prof.add(professions.get(2));
+        rep4prof.add(professions.get(3));
+        Repairman repairman4 = new Repairman(4, "Rep", "4", "rep4@rep.com", "Addr4", "441", "442", "Fourth repairman", 1.7 , rep4reg, rep4prof, "www.rep4.com/url" );
+
+        repairmans.add(repairman1);
+        repairmans.add(repairman2);
+        repairmans.add(repairman3);
+        repairmans.add(repairman4);
+
+
+        return repairmans;
+
     }
 
     private void addAllProfessionsToDrawer(ArrayList<Profession> professions) {
@@ -156,7 +226,6 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        final TextView testText = (TextView)findViewById(R.id.testText);
         //Get strings.xml resource
         Resources res = getResources();
 
@@ -165,7 +234,6 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.category_construction) {
-            testText.setText(res.getString(R.string.category_construction));
 
             for(int i=0; i<professions.size(); i++){
                 menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
@@ -180,7 +248,6 @@ public class MainActivity extends AppCompatActivity
             //categoryNavigationView.getMenu().clear();
 
         } else if (id == R.id.category_appliances) {
-            testText.setText(res.getString(R.string.category_appliances));
             for(int i=0; i<professions.size(); i++){
                 menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
                 if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
@@ -192,7 +259,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (id == R.id.category_cars) {
-            testText.setText(res.getString(R.string.category_cars));
             for(int i=0; i<professions.size(); i++){
                 menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
                 if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
@@ -204,7 +270,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (id == R.id.category_food) {
-            testText.setText(res.getString(R.string.category_food));
             for(int i=0; i<professions.size(); i++){
                 menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
                 if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
@@ -216,7 +281,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (id == R.id.category_technology) {
-            testText.setText(res.getString(R.string.catecategory_technology));
             for(int i=0; i<professions.size(); i++){
                 menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
                 if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
@@ -228,7 +292,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (id == R.id.category_style) {
-            testText.setText(res.getString(R.string.category_style));
             for(int i=0; i<professions.size(); i++){
                 menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
                 if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
@@ -240,7 +303,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else if (id == R.id.category_other) {
-            testText.setText(res.getString(R.string.category_other));
             for(int i=0; i<professions.size(); i++){
                 menuItem = navigationDrawerMenu.findItem(professions.get(i).getId());
                 if((menuItem.getOrder() == item.getOrder()+1)&&(!menuItem.isVisible())){
