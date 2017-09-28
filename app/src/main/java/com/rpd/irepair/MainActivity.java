@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
         //End of Initializing
 
 
-        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
+        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Pasdadasdasdasdasdasdasdasdasdasdasdasdas", "trt mrt", 4.7, "Sutrakasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas"));
         repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
         repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
         repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));

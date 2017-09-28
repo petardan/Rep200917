@@ -19,4 +19,8 @@
     <color name="input_register_bg">#3b4148</color>
     <color name="input_register_hint">#5e6266</color>
 
+    <!--Custom View-->
+    <color name="customViewBorderColor">#d3edff</color>
+
+
 </resources>

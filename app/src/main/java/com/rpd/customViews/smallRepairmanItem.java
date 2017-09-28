@@ -2,7 +2,10 @@ package com.rpd.customViews;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
@@ -22,8 +25,15 @@ import com.squareup.picasso.Picasso;
 public class smallRepairmanItem extends LinearLayout{
 
     TextView nameSurnameView;
+    RelativeLayout imageRelativeLayout;
     ImageButton smallProfilePicture;
-    TextView description;
+    RelativeLayout ratingRelativeLayout;
+    ImageView ratingStarImage;
+    TextView ratingView;
+
+    TextView descriptionView;
+
+    RatingLayout ratingLayout;
 
     //Default constructor
     public smallRepairmanItem(Context context, int columnCount, String nameSurname, String repairmanUrl, double rating, String description) {
@@ -41,29 +51,62 @@ public class smallRepairmanItem extends LinearLayout{
         linearParams.gravity = Gravity.CENTER;
         setOrientation(VERTICAL);
         setLayoutParams(linearParams);
-        setPadding(10,10,10,10);
+        setBackgroundResource(R.drawable.custom_view_border);
+        setPadding(20,20,20,20);
         setFocusable(true);
 
         //Setting layout items
 
         //Setting name and surname text view
         nameSurnameView = new TextView(context);
-        nameSurnameView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        nameSurnameView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         nameSurnameView.setText(nameSurname);
         nameSurnameView.setGravity(Gravity.CENTER);
+        nameSurnameView.setTypeface(null, Typeface.BOLD);
+        nameSurnameView.setMinLines(2);
+        nameSurnameView.setMaxLines(2);
+        nameSurnameView.setEllipsize(TextUtils.TruncateAt.END);
         nameSurnameView.setFocusable(false);
         nameSurnameView.setClickable(false);
+
+
+        //Image Relative Layout start
+        imageRelativeLayout = new RelativeLayout(context);
+        RelativeLayout.LayoutParams imageRelativeLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        imageRelativeLayout.setLayoutParams(imageRelativeLayoutParams);
+        imageRelativeLayout.setPadding(20,20,20,20);
+        imageRelativeLayout.setFocusable(false);
 
         //Setting profile image button
         smallProfilePicture = new ImageButton(context);
         smallProfilePicture.setAdjustViewBounds(true);
+        smallProfilePicture.setBackgroundColor(Color.TRANSPARENT);
         smallProfilePicture.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
         Picasso.with(context).load(R.drawable.blankuser1).into(smallProfilePicture);
         smallProfilePicture.setFocusable(false);
         smallProfilePicture.setClickable(false);
 
+        ratingLayout = new RatingLayout(context, rating);
+
+        imageRelativeLayout.addView(smallProfilePicture);
+        imageRelativeLayout.addView(ratingLayout);
+
+        //Image Relative Layout end
+
+        //Setting desciption view
+        descriptionView = new TextView(context);
+        descriptionView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        descriptionView.setText(description);
+        descriptionView.setGravity(Gravity.CENTER);
+        descriptionView.setFocusable(false);
+        descriptionView.setClickable(false);
+        descriptionView.setMinLines(2);
+        descriptionView.setMaxLines(2);
+        descriptionView.setEllipsize(TextUtils.TruncateAt.END);
+
         addView(nameSurnameView);
-        addView(smallProfilePicture);
+        addView(imageRelativeLayout);
+        addView(descriptionView);
 
     }
 }

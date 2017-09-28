@@ -26,8 +26,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         tools:context=".GridXMLActivity"
-        android:columnCount="3"
->
+        android:columnCount="3">
 
 
         </GridLayout>
