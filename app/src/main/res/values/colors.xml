@@ -22,5 +22,11 @@
     <!--Custom View-->
     <color name="customViewBorderColor">#d3edff</color>
 
+    <!--Large Repairman Fragment-->
+    <color name="largeAverageRatingButton">#ffef0b</color>
+    <color name="acceptRepairmanButton">#68f14d</color>
+    <color name="declineRepairmanButton">#fa312a</color>
+
+
 
 </resources>
