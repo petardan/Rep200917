@@ -25,8 +25,6 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
 
         Repairman repairman = (Repairman) getArguments().getSerializable("REPAIRMAN");
         repairmanNameAndSurname.setText(repairman.getFirstName() + " " + repairman.getLastName());
-        //parentLayout = (RelativeLayout) rootView.findViewById(R.id.parent_layout);
-        //addTestLayout();
 
 
 
