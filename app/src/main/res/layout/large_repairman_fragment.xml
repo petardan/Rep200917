@@ -33,12 +33,29 @@
                     android:layout_weight="1"
                     app:srcCompat="@drawable/blankuser1" />
 
-                <TextView
-                    android:id="@+id/textView3"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:layout_weight="1">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_weight="1"
+                        android:numStars="5" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -47,14 +64,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_weight="1"
-                    android:numStars="5" />
             </LinearLayout>
 
             <TableLayout
