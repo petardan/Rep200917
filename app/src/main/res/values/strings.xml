@@ -49,7 +49,7 @@
     <string name="largeFragmentEmailTitle">Email:</string>
     <string name="largeFragmentMobile1Title">Mobile 1:</string>
     <string name="largeFragmentMobile2Title">Mobile 2:</string>
-    <string name="selectRepairmanButton">ACCEPT</string>
+    <string name="selectRepairmanButton">SELECT</string>
     <string name="cancelRepairmanButton">CANCEL</string>
 
 

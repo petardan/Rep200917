@@ -69,6 +69,7 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
         largeFragmentMobile1View.setText(repairman.getMobilePhone1());
         largeFragmentMobile2View.setText(repairman.getMobilePhone2());
 
+        ratingStarButton.setText(Double.valueOf(repairman.getAverageRating()).toString());
 
         //Accept button onClick listener
         selectRepairmanButton.setOnClickListener(new View.OnClickListener() {
