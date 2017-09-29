@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="ring">
+    <solid android:color="#FFFFFF"/>
+
+    <stroke
+        android:width="2sp"
+        android:color="#000000" />
+
+    <solid android:color="@color/largeAverageRatingButton" />
+
+    <gradient
+        android:startColor="@color/colorTitle"
+        android:centerColor="@color/colorPrimary"
+        android:endColor="@color/colorPrimaryDark"
+        android:angle="90"/>
+
+    </shape>

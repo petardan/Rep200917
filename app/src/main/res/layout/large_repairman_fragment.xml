@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/largeFragmentNameAndSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:text="Name Surname"
+        android:textStyle="bold"
+        android:padding="10sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/largeRepairmanImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/blankuser1"
+                    android:padding="10sp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/largeAverageRatingButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rating_button"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="100sp"
+                        android:textStyle="bold"
+                        android:text="1.0" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/largeAverageRatingButton"
+                        android:layout_centerHorizontal="true"
+                        android:clickable="false"
+                        android:numStars="5"
+                        android:rating="0" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10sp">
+
+                <TableRow
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10sp">
+
+                    <TextView
+                        android:id="@+id/largeFragmentDescriptionTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="30sp"
+                        android:text="@string/largeFragmentDescriptionTitle" />
+
+                    <TextView
+                        android:id="@+id/largeFragmentDescriptionView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/professions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10sp">
+
+                    <TextView
+                        android:id="@+id/largeFragmentProfessionsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="30sp"
+                        android:text="@string/largeFragmentProfessionsTitle" />
+
+                    <TextView
+                        android:id="@+id/largeFragmentProfessionsView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/regions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10sp">
+
+                    <TextView
+                        android:id="@+id/largeFragmentRegionsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="30sp"
+                        android:text="@string/largeFragmentRegionsTitle" />
+
+                    <TextView
+                        android:id="@+id/largeFragmentRegionsView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10sp">
+
+                    <TextView
+                        android:id="@+id/largeFragmentAddressTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="30sp"
+                        android:text="@string/largeFragmentAddressTitle" />
+
+                    <TextView
+                        android:id="@+id/largeFragmentAddressView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10sp">
+
+                    <TextView
+                        android:id="@+id/largeFragmentEmailTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="30sp"
+                        android:text="@string/largeFragmentEmailTitle" />
+
+                    <TextView
+                        android:id="@+id/largeFragmentEmailView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/mobile1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10sp">
+
+                    <TextView
+                        android:id="@+id/largeFragmentMobile1Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="30sp"
+                        android:text="@string/largeFragmentMobile1Title" />
+
+                    <TextView
+                        android:id="@+id/largeFragmentMobile1View"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/mobile2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10sp">
+
+                    <TextView
+                        android:id="@+id/largeFragmentMobile2Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="30sp"
+                        android:text="@string/largeFragmentMobile2Title" />
+
+                    <TextView
+                        android:id="@+id/largeFragmentMobile2View"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                </TableRow>
+    </TableLayout>
+
+            <RelativeLayout
+                android:id="@+id/AcceptButtons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/acceptRepairmanButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/acceptRepairmanButton"
+                    android:text="@string/acceptRepairmanButton"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+
+                <Button
+                    android:id="@+id/declineRepairmanButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toStartOf="@+id/acceptRepairmanButton"
+                    android:background="@color/declineRepairmanButton"
+                    android:text="@string/declineRepairmanButton" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
