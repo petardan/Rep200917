@@ -1,6 +1,7 @@
 package com.rpd.irepair;
 
 import android.annotation.TargetApi;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,12 +20,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.TextView;
 
-import com.rpd.customViews.smallRepairmanItem;
+import com.rpd.customViews.SmallRepairmanItem;
 import com.rpd.datawrappers.DataWrapperProfessions;
 import com.rpd.datawrappers.DataWrapperRegions;
 
@@ -106,18 +104,32 @@ public class MainActivity extends AppCompatActivity
         //End of Initializing
 
 
-        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Pasdadasdasdasdasdasdasdasdasdasdasdasdas", "trt mrt", 4.7, "Sutrakasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas"));
-        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
-        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
-        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
-        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
-        repairmanList.addView(new smallRepairmanItem(this, repairmanList.getColumnCount(), "Pecko Peckovski", "trt mrt", 4.7, "Sutrak"));
-
-
+        //Define the repairmans for testing purposes
         repairmans = getRepairmans();
+        //Add repairmans icons
+        for(int i=0; i<repairmans.size(); i++){
+            addRepairmanItem(repairmans.get(i));
+        }
 
         checkIfUserIslogged();
     }
+
+    private void addRepairmanItem(final Repairman repairman) {
+        SmallRepairmanItem smallReapiSmallRepairmanItem = new SmallRepairmanItem(context, repairmanList.getColumnCount(), repairman.getFirstName() + " " + repairman.getLastName(), repairman.getImageUrl(), repairman.getAverageRating(), repairman.getProfessionsString());
+        smallReapiSmallRepairmanItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("REPAIRMAN", repairman);
+                DialogFragment largeRepaimanFragment = new LargeRepairmanInfoFragment();
+                largeRepaimanFragment.setArguments(bundle);
+                largeRepaimanFragment.show(getFragmentManager(),"Large Repairman Fragment");
+            }
+        });
+
+        repairmanList.addView(smallReapiSmallRepairmanItem);
+    }
+
 
     private ArrayList<Repairman> getRepairmans() {
         ArrayList<Repairman> repairmans = new ArrayList<Repairman>();

@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
  * Created by neotv on 9/23/17.
  */
 
-public class smallRepairmanItem extends LinearLayout{
+public class SmallRepairmanItem extends LinearLayout{
 
     TextView nameSurnameView;
     RelativeLayout imageRelativeLayout;
@@ -36,7 +36,7 @@ public class smallRepairmanItem extends LinearLayout{
     RatingLayout ratingLayout;
 
     //Default constructor
-    public smallRepairmanItem(Context context, int columnCount, String nameSurname, String repairmanUrl, double rating, String description) {
+    public SmallRepairmanItem(Context context, int columnCount, String nameSurname, String repairmanUrl, double rating, String professions) {
         super(context);
 
         Point size = new Point();
@@ -96,7 +96,7 @@ public class smallRepairmanItem extends LinearLayout{
         //Setting desciption view
         descriptionView = new TextView(context);
         descriptionView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        descriptionView.setText(description);
+        descriptionView.setText(professions);
         descriptionView.setGravity(Gravity.CENTER);
         descriptionView.setFocusable(false);
         descriptionView.setClickable(false);

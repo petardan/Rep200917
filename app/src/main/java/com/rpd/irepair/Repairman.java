@@ -1,12 +1,13 @@
 package com.rpd.irepair;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by neotv on 9/22/17.
  */
 
-public class Repairman {
+public class Repairman implements Serializable {
 
     int Id;
     String firstName;
@@ -112,12 +113,30 @@ public class Repairman {
         return regions;
     }
 
+    public String getRegionsString() {
+        ArrayList<Region> regions = getRegions();
+        String getRegionsStringResult = "";
+        for(int i=0; i<regions.size(); i++){
+            getRegionsStringResult += regions.get(i).getName() + " ";
+        }
+        return getRegionsStringResult;
+    }
+
     public void setRegions(ArrayList<Region> regions) {
         this.regions = regions;
     }
 
     public ArrayList<Profession> getProfessions() {
         return professions;
+    }
+
+    public String getProfessionsString() {
+        ArrayList<Profession> professions = getProfessions();
+        String getProfessionsStringResult = "";
+        for(int i=0; i<professions.size(); i++){
+            getProfessionsStringResult += professions.get(i).getName() + " ";
+        }
+        return getProfessionsStringResult;
     }
 
     public void setProfessions(ArrayList<Profession> professions) {
