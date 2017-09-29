@@ -24,8 +24,8 @@
 
     <!--Large Repairman Fragment-->
     <color name="largeAverageRatingButton">#ffef0b</color>
-    <color name="acceptRepairmanButton">#68f14d</color>
-    <color name="declineRepairmanButton">#fa312a</color>
+    <color name="selectRepairmanButton">#68f14d</color>
+    <color name="cancelRepairmanButton">#fa312a</color>
 
 
 

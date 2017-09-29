@@ -28,8 +28,9 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
     TextView largeFragmentMobile1View;
     TextView largeFragmentMobile2View;
 
-    Button acceptRepairmanButton;
-    Button declineRepairmanButton;
+    Button selectRepairmanButton;
+    Button cancelRepairmanButton;
+    Button ratingStarButton;
 
     RatingBar ratingBar;
 
@@ -49,8 +50,9 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
         largeFragmentMobile1View = (TextView)rootView.findViewById(R.id.largeFragmentMobile1View);
         largeFragmentMobile2View = (TextView)rootView.findViewById(R.id.largeFragmentMobile2View);
 
-        acceptRepairmanButton = (Button)rootView.findViewById(R.id.acceptRepairmanButton);
-        declineRepairmanButton = (Button)rootView.findViewById(R.id.declineRepairmanButton);
+        selectRepairmanButton = (Button)rootView.findViewById(R.id.selectRepairmanButton);
+        cancelRepairmanButton = (Button)rootView.findViewById(R.id.cancelRepairmanButton);
+        ratingStarButton = (Button)rootView.findViewById(R.id.ratingButton);
 
         ratingBar = (RatingBar)rootView.findViewById(R.id.ratingBar);
 
@@ -69,7 +71,7 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
 
 
         //Accept button onClick listener
-        acceptRepairmanButton.setOnClickListener(new View.OnClickListener() {
+        selectRepairmanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar.make(rootView, "Repairman accepted!", Snackbar.LENGTH_LONG)
@@ -78,7 +80,7 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
         });
 
         //Decline button onClick listener
-        declineRepairmanButton.setOnClickListener(new View.OnClickListener() {
+        cancelRepairmanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

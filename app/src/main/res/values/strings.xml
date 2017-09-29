@@ -42,14 +42,15 @@
 
     <!-- Large repairman fragmen -->
     <string name="largeFragmentDescriptionTitle">Description:</string>
+    <string name="largeFragmentRatingTitle">Rating:</string>
     <string name="largeFragmentProfessionsTitle">Professions:</string>
     <string name="largeFragmentRegionsTitle">Regions:</string>
     <string name="largeFragmentAddressTitle">Address:</string>
     <string name="largeFragmentEmailTitle">Email:</string>
     <string name="largeFragmentMobile1Title">Mobile 1:</string>
     <string name="largeFragmentMobile2Title">Mobile 2:</string>
-    <string name="acceptRepairmanButton">ACCEPT</string>
-    <string name="declineRepairmanButton">DECLINE</string>
+    <string name="selectRepairmanButton">ACCEPT</string>
+    <string name="cancelRepairmanButton">CANCEL</string>
 
 
 

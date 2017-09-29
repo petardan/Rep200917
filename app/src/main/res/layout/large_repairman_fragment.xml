@@ -3,18 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10sp">
 
-    <TextView
-        android:id="@+id/largeFragmentNameAndSurname"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:text="Name Surname"
-        android:textStyle="bold"
-        android:padding="10sp"/>
+        android:orientation="horizontal"
+        android:padding="10sp">
+
+        <TextView
+            android:id="@+id/largeFragmentNameAndSurname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Name Surname"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,50 +34,33 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/largeRepairmanImage"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="10sp"
                     app:srcCompat="@drawable/blankuser1"
-                    android:padding="10sp"/>
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <Button
-                        android:id="@+id/largeAverageRatingButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/round_rating_button"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:textSize="100sp"
-                        android:textStyle="bold"
-                        android:text="1.0" />
-
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        style="@style/Widget.AppCompat.RatingBar.Indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/largeAverageRatingButton"
-                        android:layout_centerHorizontal="true"
-                        android:clickable="false"
-                        android:numStars="5"
-                        android:rating="0" />
-
-
-                </RelativeLayout>
-
-            </LinearLayout>
+                <Button
+                    android:id="@+id/ratingButton"
+                    android:layout_width="100sp"
+                    android:layout_height="100sp"
+                    android:background="@drawable/rating_star"
+                    android:text="4.7"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:srcCompat="@drawable/rating_star"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@+id/largeRepairmanImage" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:paddingEnd="30sp"
+                        android:paddingEnd="20sp"
                         android:text="@string/largeFragmentDescriptionTitle" />
 
                     <TextView
@@ -104,6 +95,33 @@
                         android:layout_height="wrap_content"
                         android:text="" />
 
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/largeFragmentRatingTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingEnd="20sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/largeFragmentRatingTitle" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/largeAverageRatingButton"
+                        android:layout_centerHorizontal="true"
+                        android:clickable="false"
+                        android:numStars="5"
+                        android:rating="0" />
                 </TableRow>
 
                 <TableRow
@@ -118,7 +136,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:paddingEnd="30sp"
+                        android:paddingEnd="20sp"
                         android:text="@string/largeFragmentProfessionsTitle" />
 
                     <TextView
@@ -140,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:paddingEnd="30sp"
+                        android:paddingEnd="20sp"
                         android:text="@string/largeFragmentRegionsTitle" />
 
                     <TextView
@@ -162,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:paddingEnd="30sp"
+                        android:paddingEnd="20sp"
                         android:text="@string/largeFragmentAddressTitle" />
 
                     <TextView
@@ -184,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:paddingEnd="30sp"
+                        android:paddingEnd="20sp"
                         android:text="@string/largeFragmentEmailTitle" />
 
                     <TextView
@@ -206,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:paddingEnd="30sp"
+                        android:paddingEnd="20sp"
                         android:text="@string/largeFragmentMobile1Title" />
 
                     <TextView
@@ -228,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:paddingEnd="30sp"
+                        android:paddingEnd="20sp"
                         android:text="@string/largeFragmentMobile2Title" />
 
                     <TextView
@@ -246,25 +264,28 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/acceptRepairmanButton"
+                    android:id="@+id/selectRepairmanButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/acceptRepairmanButton"
-                    android:text="@string/acceptRepairmanButton"
+                    android:background="@color/selectRepairmanButton"
+                    android:text="@string/selectRepairmanButton"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    />
+                    android:layout_margin="10sp"/>
 
                 <Button
-                    android:id="@+id/declineRepairmanButton"
+                    android:id="@+id/cancelRepairmanButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_toStartOf="@+id/acceptRepairmanButton"
-                    android:background="@color/declineRepairmanButton"
-                    android:text="@string/declineRepairmanButton" />
+                    android:layout_toStartOf="@+id/selectRepairmanButton"
+                    android:background="@color/cancelRepairmanButton"
+                    android:text="@string/cancelRepairmanButton"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_margin="10sp"/>
             </RelativeLayout>
 
         </LinearLayout>
