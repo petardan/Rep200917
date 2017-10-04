@@ -45,7 +45,6 @@ public class SmallRepairmanItem extends LinearLayout{
         double rating = repairman.getAverageRating();
         String professions = repairman.getProfessionsString();
 
-
         Point size = new Point();
         Activity currentActivity = (Activity)getContext();
         currentActivity.getWindowManager().getDefaultDisplay().getSize(size);
