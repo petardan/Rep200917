@@ -264,7 +264,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/selectRepairmanButton"
+                    android:id="@+id/addJobAddButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -280,7 +280,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_toStartOf="@+id/selectRepairmanButton"
+                    android:layout_toStartOf="@+id/addJobAddButton"
                     android:background="@color/cancelRepairmanButton"
                     android:text="@string/cancelRepairmanButton"
                     android:textColor="@color/white"

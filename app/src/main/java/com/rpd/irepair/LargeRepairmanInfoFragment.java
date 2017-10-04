@@ -1,8 +1,8 @@
 package com.rpd.irepair;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +50,7 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
         largeFragmentMobile1View = (TextView)rootView.findViewById(R.id.largeFragmentMobile1View);
         largeFragmentMobile2View = (TextView)rootView.findViewById(R.id.largeFragmentMobile2View);
 
-        selectRepairmanButton = (Button)rootView.findViewById(R.id.selectRepairmanButton);
+        selectRepairmanButton = (Button)rootView.findViewById(R.id.addJobAddButton);
         cancelRepairmanButton = (Button)rootView.findViewById(R.id.cancelRepairmanButton);
         ratingStarButton = (Button)rootView.findViewById(R.id.ratingButton);
 
@@ -75,8 +75,16 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
         selectRepairmanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(rootView, "Repairman accepted!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("REPAIRMAN", repairman);
+                Intent i = new Intent(getActivity() , AddNewJobActivity.class);
+                i.putExtras(bundle);
+                startActivity(i);
+
+
+                /*Snackbar.make(rootView, "Repairman accepted!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
