@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rpd.irepair.R;
+import com.rpd.irepair.Repairman;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -36,8 +37,13 @@ public class SmallRepairmanItem extends LinearLayout{
     RatingLayout ratingLayout;
 
     //Default constructor
-    public SmallRepairmanItem(Context context, int columnCount, String nameSurname, String repairmanUrl, double rating, String professions) {
+    public SmallRepairmanItem(Context context, int columnCount, Repairman repairman) {
         super(context);
+
+        String nameSurname = repairman.getFirstName() + " " + repairman.getLastName();
+        String repairmanUrl = repairman.getImageUrl();
+        double rating = repairman.getAverageRating();
+        String professions = repairman.getProfessionsString();
 
         Point size = new Point();
         Activity currentActivity = (Activity)getContext();

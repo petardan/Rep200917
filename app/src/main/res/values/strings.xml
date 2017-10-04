@@ -52,6 +52,26 @@
     <string name="selectRepairmanButton">SELECT</string>
     <string name="cancelRepairmanButton">CANCEL</string>
 
+    <!-- Add new job activity-->
+    <string name="addJobTitle">Add new job:</string>
+    <string name="addJobJobTitle">Job title:</string>
+    <string name="addJobJobTitleHint">Please insert job title…</string>
+    <string name="addJobDescription">Description:</string>
+    <string name="addJobDescriptionHint">Please insert job description…</string>
+    <string name="addJobSeverity">Severity:</string>
+    <string name="addJobStart">Start date:</string>
+    <string name="addJobEnd">End date:</string>
+    <string name="addJobContact">Contact:</string>
+    <string name="addJobEmail">Email:</string>
+    <string name="addJobEmailHint">Please insert your email…</string>
+    <string name="addJobPhone">Phone:</string>
+    <string name="addJobPhoneHint">Please insert your phone number…</string>
+    <string name="addJobAddButton">ADD</string>
+    <string name="addJobCancelButton">CANCEL</string>
+
+
+
+
 
 
 </resources>

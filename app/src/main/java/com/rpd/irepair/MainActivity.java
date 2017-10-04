@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void addRepairmanItem(final Repairman repairman) {
-        SmallRepairmanItem smallReapiSmallRepairmanItem = new SmallRepairmanItem(context, repairmanList.getColumnCount(), repairman.getFirstName() + " " + repairman.getLastName(), repairman.getImageUrl(), repairman.getAverageRating(), repairman.getProfessionsString());
+        SmallRepairmanItem smallReapiSmallRepairmanItem = new SmallRepairmanItem(context, repairmanList.getColumnCount(), repairman);
         smallReapiSmallRepairmanItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
