@@ -29,6 +29,7 @@ public class AddJobTitleFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
 
     }
 
