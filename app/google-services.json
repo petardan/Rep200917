@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "721258617735",
+    "firebase_url": "https://irepair-57d7a.firebaseio.com",
+    "project_id": "irepair-57d7a",
+    "storage_bucket": "irepair-57d7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721258617735:android:8896f1af9771ac03",
+        "android_client_info": {
+          "package_name": "com.rpd.irepair"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "721258617735-j3h80fl3lsuhs2s2c51e0l9a2g744i6p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rpd.irepair",
+            "certificate_hash": "48c84771914de987651110a768c36225db43a87f"
+          }
+        },
+        {
+          "client_id": "721258617735-43juqmgnnnmehleo8cvlk0gomt5m48rh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJXsBha1saB2tavVw-FPT57mqWI6nLdRg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "721258617735-43juqmgnnnmehleo8cvlk0gomt5m48rh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

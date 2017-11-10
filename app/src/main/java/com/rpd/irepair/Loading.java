@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.rpd.datawrappers.DataWrapperProfessions;
 import com.rpd.datawrappers.DataWrapperRegions;
 import com.rpd.volley.AppController;
@@ -34,21 +37,20 @@ public class Loading extends AppCompatActivity {
 
     ImageView backgroundLogo;
     TextView title;
-
     CountDownTimer timer;
-
     SharedPreferences mPrefs;
     Context context;
 
     //URL to check the latest version on server
     final String getLatestVersionUrl = "http://80.77.147.21:81/iRepair/get_app_latest_version.php";
-
     //Current version
     Float currentVersion;
 
     ArrayList<Profession> professions;
     ArrayList<Region> regions;
 
+    FirebaseAuth auth;
+    FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,9 @@ public class Loading extends AppCompatActivity {
         context = this;
         mPrefs = PreferenceManager.getDefaultSharedPreferences(Loading.this);
 
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
+
         //Define elements
         backgroundLogo = (ImageView)findViewById(R.id.backgroundLogo);
         title = (TextView)findViewById(R.id.title);
@@ -76,12 +81,27 @@ public class Loading extends AppCompatActivity {
         //Start animation
         startAnimation();
 
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    Toast.makeText(context, "Welcome "+user.getDisplayName(), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent i = new Intent(Loading.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+
+            }
+        };
+
         //Countdown timer that performs login check after animation is done (3sec)
         timer = new CountDownTimer(3000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
-                //TODO when animation is done
                 checkingForUpdate();
             }
         }.start();
@@ -139,19 +159,11 @@ public class Loading extends AppCompatActivity {
                 toast.show();
 
                 //For testing purposes - move on
-                Intent i = new Intent(Loading.this, MainActivity.class);
-                i.putExtra("PROFESSIONS", new DataWrapperProfessions(professions));
-                i.putExtra("REGIONS", new DataWrapperRegions(regions));
-                startActivity(i);
-                finish();
-
-
+                checkIfUserIslogged();
             }
         });
 
         // add the request object to the queue to be executed
-        Log.d("JSONOBJRequest",req.toString());
-
         AppController.getInstance().addToRequestQueue(req);
     }
 
@@ -165,11 +177,7 @@ public class Loading extends AppCompatActivity {
             toast.show();
 
             //For testing purposes - move on
-            Intent i = new Intent(Loading.this, MainActivity.class);
-            i.putExtra("PROFESSIONS", new DataWrapperProfessions(professions));
-            i.putExtra("REGIONS", new DataWrapperRegions(regions));
-            startActivity(i);
-            finish();
+            checkIfUserIslogged();
         }
 
     }
@@ -202,11 +210,8 @@ public class Loading extends AppCompatActivity {
 
     private void versionUpToDate() {
 
-        Intent i = new Intent(Loading.this, MainActivity.class);
-        i.putExtra("PROFESSIONS", new DataWrapperProfessions(professions));
-        i.putExtra("REGIONS", new DataWrapperRegions(regions));
-        startActivity(i);
-        finish();
+        //For testing purposes - move on
+        checkIfUserIslogged();
     }
 
     private ArrayList<Profession> getProfessions() {
@@ -251,5 +256,33 @@ public class Loading extends AppCompatActivity {
         title.setAlpha(0f);
         title.setVisibility(View.VISIBLE);
         title.animate().alpha(1f).setDuration(2000).setListener(null);
+    }
+
+    public void checkIfUserIslogged(){
+        if (auth.getCurrentUser() != null) {
+            Log.d("USER", "User logged in");
+            Intent i = new Intent(Loading.this, MainActivity.class);
+            i.putExtra("PROFESSIONS", new DataWrapperProfessions(professions));
+            i.putExtra("REGIONS", new DataWrapperRegions(regions));
+            startActivity(i);
+            finish();
+        }
+        else{
+            Log.d("USER", "User not logged in");
+            startActivity(new Intent(Loading.this, LoginActivity.class));
+            finish();
+        }
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        auth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        auth.removeAuthStateListener(mAuthStateListener);
     }
 }
