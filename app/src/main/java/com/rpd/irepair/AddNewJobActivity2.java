@@ -17,9 +17,6 @@ import com.rpd.AddJobFragments.AddJobSeverityFragment;
 import com.rpd.AddJobFragments.AddJobStartDateFragment;
 import com.rpd.AddJobFragments.AddJobSummaryFragment;
 import com.rpd.AddJobFragments.AddJobTitleFragment;
-import com.rpd.AddJobFragments.ApplicationFragment;
-import com.rpd.AddJobFragments.BookFragment;
-import com.rpd.AddJobFragments.GameFragment;
 
 public class AddNewJobActivity2 extends AppCompatActivity {
 
@@ -64,28 +61,28 @@ public class AddNewJobActivity2 extends AppCompatActivity {
 
 
         //replace default fragment
-        replaceFragment(new ApplicationFragment());
+        replacePreviousFragment(titleFragment);
 
         //handling tab click event
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    replaceFragment(titleFragment);
+                    replacePreviousFragment(titleFragment);
                 } else if (tab.getPosition() == 1) {
-                    replaceFragment(severityFragment);
+                    replacePreviousFragment(severityFragment);
                 } else if (tab.getPosition() == 2){
-                    replaceFragment(startDateFragment);
+                    replacePreviousFragment(startDateFragment);
                 } else if (tab.getPosition() == 3){
-                    replaceFragment(endDateFragment);
+                    replacePreviousFragment(endDateFragment);
                 } else if (tab.getPosition() == 4){
-                    replaceFragment(addressFragment);
+                    replacePreviousFragment(addressFragment);
                 } else if (tab.getPosition() == 5){
-                    replaceFragment(contactFragment);
+                    replacePreviousFragment(contactFragment);
                 } else if (tab.getPosition() == 6){
-                    replaceFragment(summaryFragment);
+                    replacePreviousFragment(summaryFragment);
                 }else {
-                    replaceFragment(titleFragment);
+                    replacePreviousFragment(titleFragment);
                 }
             }
 
@@ -101,10 +98,22 @@ public class AddNewJobActivity2 extends AppCompatActivity {
         });
     }
 
-    private void replaceFragment(Fragment fragment) {
+    //Replace fragment when user clicks on next
+    private void replaceNextFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit);
+
+        transaction.replace(R.id.fragment_container, fragment);
+
+        transaction.commit();
+    }
+
+    //replace fragment when user clicks on Previous
+    private void replacePreviousFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.exit, R.anim.enter);
 
         transaction.replace(R.id.fragment_container, fragment);
 
