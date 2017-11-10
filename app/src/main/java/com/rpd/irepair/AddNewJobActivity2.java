@@ -28,6 +28,15 @@ public class AddNewJobActivity2 extends AppCompatActivity {
     private TabLayout tabLayout;
     private LinearLayout container;
 
+    //Defining add job fragments
+    final Fragment titleFragment = new AddJobTitleFragment();
+    final Fragment severityFragment = new AddJobSeverityFragment();
+    final Fragment startDateFragment = new AddJobStartDateFragment();
+    final Fragment endDateFragment = new AddJobEndDateFragment();
+    final Fragment addressFragment = new AddJobAddressFragment();
+    final Fragment contactFragment = new AddJobContactFragment();
+    final Fragment summaryFragment = new AddJobSummaryFragment();
+
     Context context;
 
     @Override
@@ -61,28 +70,28 @@ public class AddNewJobActivity2 extends AppCompatActivity {
 
 
         //replace default fragment
-        replacePreviousFragment(titleFragment);
+        replaceFragment(titleFragment);
 
         //handling tab click event
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    replacePreviousFragment(titleFragment);
+                    replaceFragment(titleFragment);
                 } else if (tab.getPosition() == 1) {
-                    replacePreviousFragment(severityFragment);
+                    replaceFragment(severityFragment);
                 } else if (tab.getPosition() == 2){
-                    replacePreviousFragment(startDateFragment);
+                    replaceFragment(startDateFragment);
                 } else if (tab.getPosition() == 3){
-                    replacePreviousFragment(endDateFragment);
+                    replaceFragment(endDateFragment);
                 } else if (tab.getPosition() == 4){
-                    replacePreviousFragment(addressFragment);
+                    replaceFragment(addressFragment);
                 } else if (tab.getPosition() == 5){
-                    replacePreviousFragment(contactFragment);
+                    replaceFragment(contactFragment);
                 } else if (tab.getPosition() == 6){
-                    replacePreviousFragment(summaryFragment);
+                    replaceFragment(summaryFragment);
                 }else {
-                    replacePreviousFragment(titleFragment);
+                    replaceFragment(titleFragment);
                 }
             }
 
@@ -98,25 +107,87 @@ public class AddNewJobActivity2 extends AppCompatActivity {
         });
     }
 
-    //Replace fragment when user clicks on next
-    private void replaceNextFragment(Fragment fragment) {
+    //Replace fragment
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit);
-
         transaction.replace(R.id.fragment_container, fragment);
 
         transaction.commit();
     }
 
+    //Replace fragment when user clicks on next
+    public void replaceNextFragment(int fragmentID) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit);
+
+        switch (fragmentID){
+            case 0:
+                transaction.replace(R.id.fragment_container, severityFragment);
+                transaction.commit();
+                break;
+            case 1:
+                transaction.replace(R.id.fragment_container, startDateFragment);
+                transaction.commit();
+                break;
+            case 2:
+                transaction.replace(R.id.fragment_container, endDateFragment);
+                transaction.commit();
+                break;
+            case 3:
+                transaction.replace(R.id.fragment_container, addressFragment);
+                transaction.commit();
+                break;
+            case 4:
+                transaction.replace(R.id.fragment_container, contactFragment);
+                transaction.commit();
+                break;
+            case 5:
+                transaction.replace(R.id.fragment_container, summaryFragment);
+                transaction.commit();
+                break;
+            default:
+
+        }
+
+
+    }
+
     //replace fragment when user clicks on Previous
-    private void replacePreviousFragment(Fragment fragment) {
+    public void replacePreviousFragment(int fragmentID) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.exit, R.anim.enter);
 
-        transaction.replace(R.id.fragment_container, fragment);
+        switch (fragmentID){
+            case 1:
+                transaction.replace(R.id.fragment_container, titleFragment);
+                transaction.commit();
+                break;
+            case 2:
+                transaction.replace(R.id.fragment_container, severityFragment);
+                transaction.commit();
+                break;
+            case 3:
+                transaction.replace(R.id.fragment_container, startDateFragment);
+                transaction.commit();
+                break;
+            case 4:
+                transaction.replace(R.id.fragment_container, endDateFragment);
+                transaction.commit();
+                break;
+            case 5:
+                transaction.replace(R.id.fragment_container, addressFragment);
+                transaction.commit();
+                break;
+            case 6:
+                transaction.replace(R.id.fragment_container, contactFragment);
+                transaction.commit();
+                break;
+            default:
 
-        transaction.commit();
+        }
     }
 }
