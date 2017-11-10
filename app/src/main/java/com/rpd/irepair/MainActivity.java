@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -21,7 +22,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridLayout;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.rpd.customViews.SmallRepairmanItem;
 import com.rpd.datawrappers.DataWrapperProfessions;
 import com.rpd.datawrappers.DataWrapperRegions;
@@ -33,7 +37,6 @@ public class MainActivity extends AppCompatActivity
 
 
     SharedPreferences mPrefs;
-    Boolean logedIn = false;
     Context context;
 
     //Category navigationVIew
@@ -47,6 +50,9 @@ public class MainActivity extends AppCompatActivity
 
     //Grid layout for the repairman list
     GridLayout repairmanList;
+
+    FirebaseAuth auth;
+    FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +74,8 @@ public class MainActivity extends AppCompatActivity
         context = this;
         mPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
-        //Get sharedPrefs values
-        logedIn = mPrefs.getBoolean("logedIn", false);
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,7 +117,22 @@ public class MainActivity extends AppCompatActivity
             addRepairmanItem(repairmans.get(i));
         }
 
-        checkIfUserIslogged();
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    Toast.makeText(context, "Welcome "+user.getDisplayName(), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+
+            }
+        };
+
     }
 
     private void addRepairmanItem(final Repairman repairman) {
@@ -184,17 +205,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void checkIfUserIslogged() {
-        if(logedIn){
-        }
-        else{
-            Intent i = new Intent(MainActivity.this, Login.class);
-            startActivity(i);
-            finish();
-        }
-
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -224,6 +234,10 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.sign_out){
+            signoutUser();
             return true;
         }
 
@@ -346,5 +360,21 @@ public class MainActivity extends AppCompatActivity
             ab.setTitle("iRepair");
             ab.setSubtitle(subtitle);
         }
+    }
+
+    private void signoutUser(){
+        auth.signOut();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        auth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        auth.removeAuthStateListener(mAuthStateListener);
     }
 }

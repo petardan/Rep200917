@@ -27,4 +27,5 @@
     <string name="txtview_img_hint">(Одберете слика на профилот)</string>
     <string name="txtview_title">Кориснички профил</string>
     <string name="catecategory_technology">Технологија</string>
+    <string name="addJobJobTitle"></string>
 </resources>

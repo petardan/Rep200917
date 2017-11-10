@@ -27,6 +27,15 @@
     <color name="selectRepairmanButton">#68f14d</color>
     <color name="cancelRepairmanButton">#fa312a</color>
 
+    <!-- For Firebase based activities -->
+    <color name="lbl_name">#333333</color>
+    <color name="btn_logut_bg">#ff6861</color>
+
+    <!-- For simple_tooltip in activity_add_new_job.xml-->
+    <color name="simpletooltip_background">@color/colorAccent</color>
+    <color name="simpletooltip_text">@android:color/primary_text_light</color>
+    <color name="simpletooltip_arrow">@color/colorAccent</color>
+
 
 
 </resources>

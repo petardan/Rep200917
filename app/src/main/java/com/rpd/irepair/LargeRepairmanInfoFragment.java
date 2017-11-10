@@ -29,6 +29,7 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
     TextView largeFragmentMobile2View;
 
     Button selectRepairmanButton;
+    Button selectRepairmanButton2;
     Button cancelRepairmanButton;
     Button ratingStarButton;
 
@@ -50,7 +51,9 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
         largeFragmentMobile1View = (TextView)rootView.findViewById(R.id.largeFragmentMobile1View);
         largeFragmentMobile2View = (TextView)rootView.findViewById(R.id.largeFragmentMobile2View);
 
-        selectRepairmanButton = (Button)rootView.findViewById(R.id.addJobAddButton);
+        selectRepairmanButton = (Button)rootView.findViewById(R.id.buttonPrevious);
+        selectRepairmanButton2 = (Button)rootView.findViewById(R.id.addJobAddButton2);
+
         cancelRepairmanButton = (Button)rootView.findViewById(R.id.cancelRepairmanButton);
         ratingStarButton = (Button)rootView.findViewById(R.id.ratingButton);
 
@@ -79,6 +82,23 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("REPAIRMAN", repairman);
                 Intent i = new Intent(getActivity() , AddNewJobActivity.class);
+                i.putExtras(bundle);
+                startActivity(i);
+
+
+                /*Snackbar.make(rootView, "Repairman accepted!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+            }
+        });
+
+        //Accept second add job button onClick listener
+        selectRepairmanButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("REPAIRMAN", repairman);
+                Intent i = new Intent(getActivity() , AddNewJobActivity2.class);
                 i.putExtras(bundle);
                 startActivity(i);
 
