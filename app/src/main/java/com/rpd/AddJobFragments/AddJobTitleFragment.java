@@ -31,8 +31,6 @@ public class AddJobTitleFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-
-
     }
 
     @Nullable
