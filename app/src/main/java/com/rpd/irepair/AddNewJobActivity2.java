@@ -10,6 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.rpd.AddJobFragments.AddJobAddressFragment;
+import com.rpd.AddJobFragments.AddJobContactFragment;
+import com.rpd.AddJobFragments.AddJobEndDateFragment;
+import com.rpd.AddJobFragments.AddJobSeverityFragment;
+import com.rpd.AddJobFragments.AddJobStartDateFragment;
+import com.rpd.AddJobFragments.AddJobSummaryFragment;
 import com.rpd.AddJobFragments.AddJobTitleFragment;
 import com.rpd.AddJobFragments.ApplicationFragment;
 import com.rpd.AddJobFragments.BookFragment;
@@ -37,12 +43,25 @@ public class AddNewJobActivity2 extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         container = (LinearLayout) findViewById(R.id.fragment_container);
 
+        //Defining add job fragments
+        final Fragment titleFragment = new AddJobTitleFragment();
+        final Fragment severityFragment = new AddJobSeverityFragment();
+        final Fragment startDateFragment = new AddJobStartDateFragment();
+        final Fragment endDateFragment = new AddJobEndDateFragment();
+        final Fragment addressFragment = new AddJobAddressFragment();
+        final Fragment contactFragment = new AddJobContactFragment();
+        final Fragment summaryFragment = new AddJobSummaryFragment();
+
 
         //create tabs title
-        tabLayout.addTab(tabLayout.newTab().setText("Applications"));
-        tabLayout.addTab(tabLayout.newTab().setText("Books"));
-        tabLayout.addTab(tabLayout.newTab().setText("Games"));
-        tabLayout.addTab(tabLayout.newTab().setText("Job Title"));
+        tabLayout.addTab(tabLayout.newTab().setText("Title"));
+        tabLayout.addTab(tabLayout.newTab().setText("Severity"));
+        tabLayout.addTab(tabLayout.newTab().setText("Start"));
+        tabLayout.addTab(tabLayout.newTab().setText("End"));
+        tabLayout.addTab(tabLayout.newTab().setText("Address"));
+        tabLayout.addTab(tabLayout.newTab().setText("Contact"));
+        tabLayout.addTab(tabLayout.newTab().setText("Summary"));
+
 
         //replace default fragment
         replaceFragment(new ApplicationFragment());
@@ -52,13 +71,21 @@ public class AddNewJobActivity2 extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    replaceFragment(new ApplicationFragment());
+                    replaceFragment(titleFragment);
                 } else if (tab.getPosition() == 1) {
-                    replaceFragment(new BookFragment());
+                    replaceFragment(severityFragment);
                 } else if (tab.getPosition() == 2){
-                    replaceFragment(new GameFragment());
-                } else {
-                    replaceFragment(new AddJobTitleFragment());
+                    replaceFragment(startDateFragment);
+                } else if (tab.getPosition() == 3){
+                    replaceFragment(endDateFragment);
+                } else if (tab.getPosition() == 4){
+                    replaceFragment(addressFragment);
+                } else if (tab.getPosition() == 5){
+                    replaceFragment(contactFragment);
+                } else if (tab.getPosition() == 6){
+                    replaceFragment(summaryFragment);
+                }else {
+                    replaceFragment(titleFragment);
                 }
             }
 
