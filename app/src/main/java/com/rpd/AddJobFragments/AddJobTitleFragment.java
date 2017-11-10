@@ -29,9 +29,20 @@ public class AddJobTitleFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.add_job_title_fragment_layout, container, false);
 
         //Get add job activity
         addNewJobActivity2 = (AddNewJobActivity2)getActivity();
+
+        nextButton = (Button)view.findViewById(R.id.buttonNext);
+        previousButton = (Button)view.findViewById(R.id.buttonPrevious);
 
         //Set button NEXT onClick
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -40,12 +51,6 @@ public class AddJobTitleFragment extends Fragment {
                 addNewJobActivity2.replaceNextFragment(fragmentID);
             }
         });
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_job_title_fragment_layout, container, false);
 
         return view;
     }
