@@ -13,7 +13,7 @@
     <string name="category_food">Храна</string>
     <string name="category_logout">Одјава</string>
     <string name="category_other">Разно</string>
-    <string name="category_settings">Подесувања</string>
+    <string name="category_user_settings">Подесувања</string>
     <string name="category_settings_title">Подесувања</string>
     <string name="category_style">Стил</string>
     <string name="defaultUSerImageDesc">Слика</string>

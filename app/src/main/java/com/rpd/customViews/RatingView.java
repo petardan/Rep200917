@@ -16,12 +16,12 @@ import com.squareup.picasso.Picasso;
  * Created by Petar on 9/28/2017.
  */
 
-public class RatingLayout extends RelativeLayout{
+public class RatingView extends RelativeLayout{
 
     ImageView ratingStarImage;
     TextView ratingView;
 
-    public RatingLayout(Context context, double rating) {
+    public RatingView(Context context, String rating) {
         super(context);
 
         RelativeLayout.LayoutParams ratingRelativeLayoutParams = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -48,7 +48,7 @@ public class RatingLayout extends RelativeLayout{
         ratingViewParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         ratingViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         ratingView.setLayoutParams(ratingViewParams);
-        ratingView.setText(Double.valueOf(rating).toString());
+        ratingView.setText(rating);
         ratingView.setTextSize(16);
         ratingView.setTypeface(null, Typeface.BOLD);
         ratingView.setPadding(0,0,40,40);

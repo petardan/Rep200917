@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rpd.irepair.R;
-import com.rpd.irepair.Repairman;
+import com.rpd.customClasses.Repairman;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -34,7 +33,7 @@ public class SmallRepairmanItem extends LinearLayout{
 
     TextView descriptionView;
 
-    RatingLayout ratingLayout;
+    RatingView ratingLayout;
 
     //Default constructor
     public SmallRepairmanItem(Context context, int columnCount, Repairman repairman) {
@@ -42,7 +41,7 @@ public class SmallRepairmanItem extends LinearLayout{
 
         String nameSurname = repairman.getFirstName() + " " + repairman.getLastName();
         String repairmanUrl = repairman.getImageUrl();
-        double rating = repairman.getAverageRating();
+        String rating = repairman.getAverageRating();
         String professions = repairman.getProfessionsString();
 
         Point size = new Point();
@@ -92,7 +91,7 @@ public class SmallRepairmanItem extends LinearLayout{
         smallProfilePicture.setFocusable(false);
         smallProfilePicture.setClickable(false);
 
-        ratingLayout = new RatingLayout(context, rating);
+        ratingLayout = new RatingView(context, rating);
 
         imageRelativeLayout.addView(smallProfilePicture);
         imageRelativeLayout.addView(ratingLayout);

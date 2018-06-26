@@ -1,4 +1,7 @@
-package com.rpd.irepair;
+package com.rpd.customClasses;
+
+import com.rpd.customClasses.Profession;
+import com.rpd.customClasses.Region;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 
 public class Repairman implements Serializable {
 
-    int Id;
+    String Id;
     String firstName;
     String lastName;
     String email;
@@ -17,12 +20,15 @@ public class Repairman implements Serializable {
     String mobilePhone1;
     String mobilePhone2;
     String description;
-    double averageRating;
+    String averageRating;
     ArrayList<Region> regions;
     ArrayList<Profession> professions;
     String imageUrl;
 
-    public Repairman(int id, String firstName, String lastName, String email, String address, String mobilePhone1, String mobilePhone2, String description, double averageRating, ArrayList<Region> regions, ArrayList<Profession> professions, String imageUrl) {
+    public Repairman() {
+    }
+
+    public Repairman(String id, String firstName, String lastName, String email, String address, String mobilePhone1, String mobilePhone2, String description, String averageRating, ArrayList<Region> regions, ArrayList<Profession> professions, String imageUrl) {
         Id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,11 +43,11 @@ public class Repairman implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public int getId() {
+    public String getrepairmanId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setrepairmanId(String id) {
         Id = id;
     }
 
@@ -101,11 +107,11 @@ public class Repairman implements Serializable {
         this.description = description;
     }
 
-    public double getAverageRating() {
+    public String getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(float averageRating) {
+    public void setAverageRating(String averageRating) {
         this.averageRating = averageRating;
     }
 

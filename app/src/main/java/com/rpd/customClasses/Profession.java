@@ -1,4 +1,4 @@
-package com.rpd.irepair;
+package com.rpd.customClasses;
 
 import java.io.Serializable;
 
@@ -8,12 +8,15 @@ import java.io.Serializable;
 
 public class Profession implements Serializable{
 
-    int id;
-    int categoryId;
+    String id;
+    String categoryId;
     String name;
     String description;
 
-    public Profession(int id, int categoryId, String name, String description) {
+    public Profession() {
+    }
+
+    public Profession(String id, String categoryId, String name, String description) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -21,18 +24,19 @@ public class Profession implements Serializable{
     }
 
     public int getId() {
-        return id;
+        return Integer.valueOf(id);
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     public int getCategoryId() {
-        return categoryId;
+        return Integer.valueOf(categoryId);
+
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

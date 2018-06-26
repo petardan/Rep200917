@@ -1,4 +1,4 @@
-package com.rpd.irepair;
+package com.rpd.customViews;
 
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.rpd.irepair.AddNewJobActivity;
+import com.rpd.irepair.R;
+import com.rpd.customClasses.Repairman;
 
 /**
  * Created by Petar on 9/29/2017.
@@ -28,7 +32,6 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
     TextView largeFragmentMobile1View;
     TextView largeFragmentMobile2View;
 
-    Button selectRepairmanButton;
     Button selectRepairmanButton2;
     Button cancelRepairmanButton;
     Button ratingStarButton;
@@ -51,7 +54,6 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
         largeFragmentMobile1View = (TextView)rootView.findViewById(R.id.largeFragmentMobile1View);
         largeFragmentMobile2View = (TextView)rootView.findViewById(R.id.largeFragmentMobile2View);
 
-        selectRepairmanButton = (Button)rootView.findViewById(R.id.buttonPrevious);
         selectRepairmanButton2 = (Button)rootView.findViewById(R.id.addJobAddButton2);
 
         cancelRepairmanButton = (Button)rootView.findViewById(R.id.cancelRepairmanButton);
@@ -74,8 +76,9 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
 
         ratingStarButton.setText(Double.valueOf(repairman.getAverageRating()).toString());
 
-        //Accept button onClick listener
-        selectRepairmanButton.setOnClickListener(new View.OnClickListener() {
+
+        //Accept add job button onClick listener
+        selectRepairmanButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -84,25 +87,7 @@ public class LargeRepairmanInfoFragment extends DialogFragment {
                 Intent i = new Intent(getActivity() , AddNewJobActivity.class);
                 i.putExtras(bundle);
                 startActivity(i);
-
-
-                /*Snackbar.make(rootView, "Repairman accepted!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-            }
-        });
-
-        //Accept second add job button onClick listener
-        selectRepairmanButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("REPAIRMAN", repairman);
-                Intent i = new Intent(getActivity() , AddNewJobActivity2.class);
-                i.putExtras(bundle);
-                startActivity(i);
-
-
+                LargeRepairmanInfoFragment.this.dismiss();
                 /*Snackbar.make(rootView, "Repairman accepted!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
             }

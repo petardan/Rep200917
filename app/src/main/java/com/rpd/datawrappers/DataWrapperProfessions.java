@@ -1,6 +1,6 @@
 package com.rpd.datawrappers;
 
-import com.rpd.irepair.Profession;
+import com.rpd.customClasses.Profession;
 
 import java.io.Serializable;
 import java.util.ArrayList;

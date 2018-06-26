@@ -18,11 +18,17 @@
     <!--Register strings-->
     <string name="defaultUSerImageDesc">Image</string>
     <string name="hint_register_username">Username</string>
-    <string name="hint_register_email">Email</string>
     <string name="btn_register">REGISTER</string>
     <string name="btn_link_to_login">Already registred! Login Me.</string>
     <string name="txtview_title">USER PROFILE</string>
     <string name="txtview_img_hint">(Select your profile picture)</string>
+    <string name="hint_register_name">Name</string>
+    <string name="hint_register_surname">Surname</string>
+    <string name="hint_register_email">Email</string>
+    <string name="hint_register_password">Password</string>
+    <string name="hint_register_address">Address</string>
+    <string name="hint_register_phone1">Phone 1</string>
+    <string name="hint_register_phone2">Phone 2</string>
 
     <!-- Downloading Update -->
     <string name="dwnl_update_title">Downloading Latest Version &#8230; </string>
@@ -36,8 +42,11 @@
     <string name="category_style">Style</string>
     <string name="category_other">Other</string>
 
+    <string name="category_myjobs_title">My jobs</string>
+    <string name="category_assigned_jobs">Assigned jobs</string>
+
     <string name="category_settings_title">Settings</string>
-    <string name="category_settings">Settings</string>
+    <string name="category_user_settings">User settings</string>
     <string name="category_logout">Logout</string>
 
     <!-- Large repairman fragmen -->
@@ -59,8 +68,10 @@
     <string name="addJobDescription">Description:</string>
     <string name="addJobDescriptionHint">Please insert job description…</string>
     <string name="addJobSeverity">Severity:</string>
-    <string name="addJobStart">Start date:</string>
-    <string name="addJobEnd">End date:</string>
+    <string name="addJobStartDate">Start date:</string>
+    <string name="addJobStartTime">Start time:</string>
+    <string name="addJobEndDate">End date:</string>
+    <string name="addJobEndTime">End time:</string>
     <string name="addJobContact">Contact:</string>
     <string name="addJobEmail">Email:</string>
     <string name="addJobEmailHint">Please insert your email…</string>
@@ -71,6 +82,7 @@
     <string name="addJobAddButton">ADD</string>
     <string name="addJobCancelButton">CANCEL</string>
     <string name="addJobSeveritySpinnerPrompt">Slect job severity:</string>
+    <string name="addJobSummary">Summary:</string>
 
     <!-- For Firebase based activities -->
     <string name="action_sign_in_short">Register</string>
@@ -102,6 +114,18 @@
     <string name="buttonNext">Next</string>
     <string name="buttonCancel">Cancel</string>
     <string name="buttonPrevious">Previous</string>
+
+    <!-- User profile strings -->
+    <string name="prompt_password">Password</string>
+
+    <!-- Open job activity -->
+    <string name="open_job_title">Title</string>
+    <string name="open_job_status_title">Status: </string>
+    <string name="open_job_status">Waiting for confirmation...</string>
+
+    <!-- Chat activity -->
+    <string name="chat_activity_send_button">SEND</string>
+
 
 
 </resources>

@@ -1,4 +1,4 @@
-package com.rpd.irepair;
+package com.rpd.customClasses;
 
 import java.io.Serializable;
 
@@ -8,22 +8,25 @@ import java.io.Serializable;
 
 public class Region implements Serializable{
 
-    int id;
+    String id;
     String name;
     String cityName;
 
-    public Region(int id, String name, String cityName) {
+    public Region() {
+    }
+
+    public Region(String id, String name, String cityName) {
         this.id = id;
         this.name = name;
         this.cityName = cityName;
     }
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

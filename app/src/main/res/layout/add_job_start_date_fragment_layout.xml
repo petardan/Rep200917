@@ -5,111 +5,184 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.rpd.irepair.AddNewJobActivity"
-    android:padding="10sp">
+    android:padding="10sp"
+    tools:context="com.rpd.irepair.AddNewJobActivity">
 
-    <TextView
-        android:id="@+id/addJobTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/addJobTitle"
-        android:padding="10sp"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"/>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/addJobParentLayout"
+        <TextView
+            android:id="@+id/addJobTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10sp"
+            android:text="@string/addJobStartDate"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/relativeLayout"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/addJobTitle"
             android:orientation="vertical">
 
-            <TableLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true">
 
-                <TableRow
-                    android:id="@+id/addJobStartLayout"
+                <LinearLayout
+                    android:id="@+id/addJobParentLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/addJobStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/addJobStart"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/addJobStartHelp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@android:drawable/ic_menu_help" />
-
-                    <EditText
-                        android:id="@+id/addJobStartDate"
+                    <TableLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="date" />
+                        android:layout_height="match_parent">
 
-                </TableRow>
+                        <TableRow
+                            android:id="@+id/addJobStartDateLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical">
 
-            </TableLayout>
+                            <TextView
+                                android:id="@+id/addJobStartDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/addJobStartDate"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
-            <RelativeLayout
-                android:id="@+id/addJobAcceptButtonsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/addJobStartDateHelp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@android:drawable/ic_menu_help" />
 
-                <Button
-                    android:id="@+id/buttonPrevious"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toStartOf="@+id/buttonNext"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/buttonPrevious"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+                        </TableRow>
 
-                <Button
-                    android:id="@+id/buttonNext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="10sp"
-                    android:background="@color/colorPrimaryDark"
-                    android:text="@string/buttonNext"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/buttonCancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="10sp"
-                    android:layout_toStartOf="@+id/buttonPrevious"
-                    android:background="@color/cancelRepairmanButton"
-                    android:text="@string/buttonCancel"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+                            <EditText
+                                android:id="@+id/addJobStartDateEdit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="date"
+                                android:focusable="false"/>
+                        </TableRow>
 
-            </RelativeLayout>
+                        <TableRow
+                            android:id="@+id/addJobStartTimeLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/addJobStartTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/addJobStartTime"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/addJobStartTimeHelp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@android:drawable/ic_menu_help" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <EditText
+                                android:id="@+id/addJobStartTimeEdit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="date"
+                                android:focusable="false"/>
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+            </ScrollView>
 
 
-        </LinearLayout>
-    </ScrollView>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_alignBaseline="@+id/buttonPrevious"
+                android:layout_alignBottom="@+id/buttonPrevious"
+                android:layout_alignParentStart="true"
+                android:background="@color/cancelRepairmanButton"
+                android:text="@string/buttonCancel"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonPrevious"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_toStartOf="@+id/buttonAddJob"
+                android:background="@color/colorPrimary"
+                android:text="@string/buttonPrevious"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonAddJob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_alignBaseline="@+id/buttonCancel"
+                android:layout_alignBottom="@+id/buttonCancel"
+                android:layout_alignParentEnd="true"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/buttonNext"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/progressView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12dp"
+            android:text="" />
+
+    </RelativeLayout>
 
 </LinearLayout>
