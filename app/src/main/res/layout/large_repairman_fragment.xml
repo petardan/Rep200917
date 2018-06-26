@@ -263,30 +263,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/buttonPrevious"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/selectRepairmanButton"
-                    android:text="@string/selectRepairmanButton"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_margin="10sp"/>
 
                 <Button
                     android:id="@+id/addJobAddButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/selectRepairmanButton"
-                    android:text="Select2"
+                    android:text="@string/selectRepairmanButton"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_marginLeft="10sp"
                     android:layout_marginRight="10sp"
                     android:layout_alignParentBottom="true"
-                    android:layout_toStartOf="@+id/buttonPrevious" />
+                    android:layout_alignParentEnd="true"
+                     />
 
                 <Button
                     android:id="@+id/cancelRepairmanButton"

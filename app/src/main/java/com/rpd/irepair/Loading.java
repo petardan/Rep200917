@@ -23,6 +23,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.rpd.customClasses.Profession;
+import com.rpd.customClasses.Region;
 import com.rpd.datawrappers.DataWrapperProfessions;
 import com.rpd.datawrappers.DataWrapperRegions;
 import com.rpd.volley.AppController;
@@ -74,7 +76,6 @@ public class Loading extends AppCompatActivity {
         backgroundLogo = (ImageView)findViewById(R.id.backgroundLogo);
         title = (TextView)findViewById(R.id.title);
 
-        professions = getProfessions();
         regions = getRegions();
 
 
@@ -218,10 +219,10 @@ public class Loading extends AppCompatActivity {
 
         //Create dummy professions for testing purposes
         ArrayList<Profession> professions = new ArrayList<Profession>();
-        Profession profession1 = new Profession(1,100, "profession1", "prof1_desc");
-        Profession profession2 = new Profession(2,100, "profession2", "prof2_desc");
-        Profession profession3 = new Profession(3,200, "profession3", "prof3_desc");
-        Profession profession4 = new Profession(4,200, "profession4", "prof4_desc");
+        Profession profession1 = new Profession(Integer.valueOf(1).toString(),Integer.valueOf(100).toString(), "profession1", "prof1_desc");
+        Profession profession2 = new Profession(Integer.valueOf(2).toString(),Integer.valueOf(100).toString(), "profession2", "prof2_desc");
+        Profession profession3 = new Profession(Integer.valueOf(3).toString(),Integer.valueOf(200).toString(), "profession3", "prof3_desc");
+        Profession profession4 = new Profession(Integer.valueOf(4).toString(),Integer.valueOf(200).toString(), "profession4", "prof4_desc");
 
         professions.add(profession1);
         professions.add(profession2);
@@ -234,10 +235,10 @@ public class Loading extends AppCompatActivity {
 
         //Create dummy regions  for testing purposes
         ArrayList<Region> regions = new ArrayList<Region>();
-        Region region1 = new Region(1, "Region1", "Skopje");
-        Region region2 = new Region(2, "Region2", "Skopje");
-        Region region3 = new Region(3, "Region3", "Ohrid");
-        Region region4 = new Region(4, "Region4", "Bitola");
+        Region region1 = new Region("1", "Region1", "Skopje");
+        Region region2 = new Region("2", "Region2", "Skopje");
+        Region region3 = new Region("3", "Region3", "Ohrid");
+        Region region4 = new Region("4", "Region4", "Bitola");
 
         regions.add(region1);
         regions.add(region2);

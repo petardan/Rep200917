@@ -41,13 +41,25 @@
             android:orderInCategory="700"/>
     </group>
 
+    <item android:title="@string/category_myjobs_title"
+        android:orderInCategory="995">
+        <menu>
+            <item
+                android:id="@+id/category_assigned_jobs"
+                android:icon="@mipmap/ic_build_black_24dp"
+                android:title="@string/category_assigned_jobs"
+                android:orderInCategory="996"/>
+
+        </menu>
+    </item>
+
     <item android:title="@string/category_settings_title"
         android:orderInCategory="997">
         <menu>
             <item
-                android:id="@+id/category_settings"
+                android:id="@+id/category_user_settings"
                 android:icon="@mipmap/ic_settings_black_24dp"
-                android:title="@string/category_settings"
+                android:title="@string/category_user_settings"
                 android:orderInCategory="998"/>
             <item
                 android:id="@+id/category_logout"
