@@ -3,6 +3,8 @@
     package="com.rpd.irepair">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
     <application
         android:name="com.rpd.volley.AppController"
@@ -32,6 +34,17 @@
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".OpenJobsPerUserActivity" />
         <activity android:name=".ChatActivity" />
+
+        <!-- Broadcast receiver that wakes the service after boot-->
+        <receiver android:name="com.rpd.broadcastReceivers.iRepairBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- iRepair Background Service-->
+        <service android:name="com.rpd.services.BackgroundService" android:enabled="true"/>
+
     </application>
 
 </manifest>
