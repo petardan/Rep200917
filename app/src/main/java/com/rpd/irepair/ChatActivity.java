@@ -4,14 +4,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +41,6 @@ import com.google.firebase.storage.UploadTask;
 import com.rpd.customAdapters.MessageAdapter;
 import com.rpd.customClasses.FriendlyMessage;
 import com.rpd.customClasses.Job;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,7 +106,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatPrefs = getSharedPreferences("chat_prefs", Activity.MODE_PRIVATE);
 
-        setIsChatAppForeground(true);
+        setIsChatAppForeground(true, jobID);
 
         //Create Notifications channel
         createNotificationChannel();
@@ -341,29 +336,11 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isMessageRead(Long messageTimestamp, Long lastMessageReadTimestamp) {
-        return messageTimestamp <= lastMessageReadTimestamp;
-    }
-
-    private boolean isTheCurrentJob(String messageJobID, String jobId) {
-        return messageJobID.equalsIgnoreCase(jobId);
-    }
-
-
-    private boolean messageIsFromCurrentUser(String senderID, String uid) {
-        return senderID.equalsIgnoreCase(uid);
-    }
-
     private void updateLastMessageReadTimestamp(Long timestamp) {
         SharedPreferences.Editor editor = chatPrefs.edit();
         editor.putLong("LAST_MESSAGE_READ_TIMESTAMP", timestamp);
         editor.apply();
     }
-
-    private Long getLastMessageReadTimestamp(){
-        return chatPrefs.getLong("LAST_MESSAGE_READ_TIMESTAMP", 0);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -414,7 +391,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-        setIsChatAppForeground(true);
+        setIsChatAppForeground(true, jobID);
         Log.d(NOTIFICATION_TAG, "OnRESUME - App is in foreground");
     }
 
@@ -425,61 +402,20 @@ public class ChatActivity extends AppCompatActivity {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
         stopReceivingMessages();
-        setIsChatAppForeground(false);
+        setIsChatAppForeground(false, "");
         Log.d(NOTIFICATION_TAG, "OnPause - App is in background");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        setIsChatAppForeground(false);
+        setIsChatAppForeground(false, "");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        setIsChatAppForeground(false);
-    }
-
-    //Add notification for new recived message
-    public void createNotification(String name, String text, Job job) {
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("JOB", job);
-        Intent resultIntent = new Intent(this, ChatActivity.class);
-        resultIntent.putExtras(bundle);
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-
-        // Because clicking the notification opens a new ("special") activity, there's
-        // no need to create an artificial back stack.
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        this,
-                        0,
-                        resultIntent,
-                        PendingIntent.FLAG_CANCEL_CURRENT
-                );
-
-
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channelID)
-                .setSmallIcon(R.mipmap.icon)
-                .setContentTitle(name + " says:")
-                .setContentText(text)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(text))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(resultPendingIntent)
-                .setAutoCancel(true);
-
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        // Sets an ID for the notification
-        long jobIDlong = Long.valueOf(currentJob.getJobId()) / 10000;
-        int notificationID = (int)jobIDlong;
-        notificationManager.notify(notificationID, mBuilder.build());
-
+        setIsChatAppForeground(false, "");
     }
 
     //Create notification channel
@@ -495,16 +431,10 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    public void setIsChatAppForeground(boolean isAppForeground){
+    public void setIsChatAppForeground(boolean isAppForeground, String jobID){
         SharedPreferences.Editor editor = chatPrefs.edit();
         editor.putBoolean("ISAPPFOREGROUND", isAppForeground);
+        editor.putString("APPFOREGROUNDJOBID", jobID);
         editor.apply();
     }
-
-    public boolean getIsChatAppForeground(){
-        return chatPrefs.getBoolean("ISAPPFOREGROUND", false);
-    }
-
-
-
 }

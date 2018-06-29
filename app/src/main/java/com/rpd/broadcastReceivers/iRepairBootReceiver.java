@@ -9,7 +9,7 @@ import com.rpd.services.BackgroundService;
 
 public class iRepairBootReceiver extends BroadcastReceiver {
 
-    String TAG = "iRepair";
+    String TAG = "iRepairBroadcastReceiver";
 
     @Override
     public void onReceive(Context context, Intent arg1) {
