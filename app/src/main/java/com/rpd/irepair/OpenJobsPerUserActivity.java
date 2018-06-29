@@ -30,7 +30,7 @@ public class OpenJobsPerUserActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference jobsperuserDatabaseReference;
-    FirebaseUser currentFirebaseUser;
+    FirebaseUser currentUser;
     private ChildEventListener jobsperuserChildEventListener;
 
     String currentJobID="";
@@ -51,9 +51,9 @@ public class OpenJobsPerUserActivity extends AppCompatActivity {
 
         //Get Firebase instances
         auth = FirebaseAuth.getInstance();
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        currentUser = FirebaseAuth.getInstance().getCurrentUser() ;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        jobsperuserDatabaseReference = mFirebaseDatabase.getReference().child("jobsperuser").child(currentFirebaseUser.getUid()).child("open");
+        jobsperuserDatabaseReference = mFirebaseDatabase.getReference().child("jobsperuser").child(currentUser.getUid()).child("open");
 
         openJobsLinearLayout = findViewById(R.id.openJobsLinearLayout);
 
@@ -79,7 +79,7 @@ public class OpenJobsPerUserActivity extends AppCompatActivity {
             }
         };
 
-        //Get repairmans
+        //Get jobs
         jobsperuserDatabaseReference.addChildEventListener(jobsperuserChildEventListener);
     }
 

@@ -44,6 +44,7 @@ import com.rpd.customClasses.User;
 import com.rpd.customViews.LargeRepairmanInfoFragment;
 import com.rpd.customViews.SmallRepairmanItem;
 import com.rpd.datawrappers.DataWrapperRegions;
+import com.rpd.services.BackgroundService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -125,7 +126,9 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Intent intent = new Intent(context, BackgroundService.class);
+                context.startService(intent);
+                Snackbar.make(view, "Background service started", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
