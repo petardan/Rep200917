@@ -12,17 +12,19 @@ public class FriendlyMessage {
     private String senderID;
     private Long timestamp;
     private String jobID;
+    private int status;
 
     public FriendlyMessage() {
     }
 
-    public FriendlyMessage(String text, String name, String photoUrl, String senderID, Long timestamp, String jobID) {
+    public FriendlyMessage(String text, String name, String photoUrl, String senderID, Long timestamp, String jobID, int status) {
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
         this.senderID = senderID;
         this.timestamp = timestamp;
         this.jobID = jobID;
+        this.status = status;
     }
 
     public String getText() {
@@ -71,5 +73,13 @@ public class FriendlyMessage {
 
     public void setJobID(String jobID) {
         this.jobID = jobID;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

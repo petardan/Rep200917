@@ -153,12 +153,6 @@ public class BackgroundService extends Service
 
                 //These checks can be useful in the background service
                     if (friendlyMessage != null) {
-                        if(messageIsFromCurrentUser(friendlyMessage.getSenderID(), currentUser.getUid())){
-                            //Do nothing
-                            Log.d(NOTIFICATION_TAG, "From current user");
-                            updateLastMessageReadTimestamp(friendlyMessage.getTimestamp());
-                        }
-                        else {
                             if(getIsChatAppForeground()){
                                 //The application is in foreground
                                 Log.d(NOTIFICATION_TAG, "App is in foreground ");
@@ -170,7 +164,7 @@ public class BackgroundService extends Service
                             else{
                                 //The app is in background
                                 Log.d(NOTIFICATION_TAG, "App is in background ");
-                                if (isMessageRead(friendlyMessage.getTimestamp(), getLastMessageReadTimestamp())){
+                                if (friendlyMessage.getStatus()==1){
                                     //Message already read
                                     Log.d(NOTIFICATION_TAG, "Already read");
                                 } else {
@@ -179,7 +173,6 @@ public class BackgroundService extends Service
                                     createNotification(friendlyMessage.getName(), friendlyMessage.getText() + "NEW", openJob);
                                 }
                             }
-                        }
                     }
             }
             @Override
@@ -219,27 +212,14 @@ public class BackgroundService extends Service
         return START_STICKY;
     }
 
-    private boolean isMessageRead(Long messageTimestamp, Long lastMessageReadTimestamp) {
-        return messageTimestamp <= lastMessageReadTimestamp;
-    }
-
     private boolean isTheCurrentJob(String messageJobID, String jobId) {
         return messageJobID.equalsIgnoreCase(jobId);
-    }
-
-
-    private boolean messageIsFromCurrentUser(String senderID, String uid) {
-        return senderID.equalsIgnoreCase(uid);
     }
 
     private void updateLastMessageReadTimestamp(Long timestamp) {
         SharedPreferences.Editor editor = chatPrefs.edit();
         editor.putLong("LAST_MESSAGE_READ_TIMESTAMP", timestamp);
         editor.apply();
-    }
-
-    private Long getLastMessageReadTimestamp(){
-        return chatPrefs.getLong("LAST_MESSAGE_READ_TIMESTAMP", 0);
     }
 
     //Add notification for new recived message
