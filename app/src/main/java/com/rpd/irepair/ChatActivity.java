@@ -174,7 +174,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO: Send messages on click
 
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, null, currentUser.getUid(), System.currentTimeMillis(), currentJob.getJobId());
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, null, currentUser.getUid(), System.currentTimeMillis(), currentJob.getJobId(), 1);
                 updateLastMessageReadTimestamp(friendlyMessage.getTimestamp());
                 chatDatabaseReference.push().setValue(friendlyMessage);
 
@@ -274,60 +274,22 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     FriendlyMessage friendlyMessage = dataSnapshot.getValue(FriendlyMessage.class);
+                    //Mark message as read (status -> 1)
+                    dataSnapshot.getRef().child("status").setValue(1);
                     if (friendlyMessage != null) {
                         Log.d(NOTIFICATION_TAG, friendlyMessage.getText() + "!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     }
                     mMessageAdapter.add(friendlyMessage);
-
-                //These checks can be useful in the background service
-                    /*if (friendlyMessage != null) {
-                        if(messageIsFromCurrentUser(friendlyMessage.getSenderID(), currentUser.getUid())){
-                            //Do nothing
-                            Log.d(NOTIFICATION_TAG, "From current user");
-                            updateLastMessageReadTimestamp(friendlyMessage.getTimestamp());
-                        }
-                        else {
-                            //This condition is obsolete, the app is always active because this is ChatActivity
-                            if(getIsChatAppForeground()){
-                                //The application is in foreground, do not show the notification
-                                Log.d(NOTIFICATION_TAG, "App is in foreground ");
-                            }
-                            else{
-                                //The app is in background, show the notification
-                                Log.d(NOTIFICATION_TAG, "App is in background ");
-                                if (isTheCurrentJob(friendlyMessage.getJobID(), currentJob.getJobId())){
-                                    if (isMessageRead(friendlyMessage.getTimestamp(), getLastMessageReadTimestamp())){
-                                        //Do nothing
-                                        Log.d(NOTIFICATION_TAG, "Already read");
-                                    }
-                                    else{
-                                        //TO DO: Show notification only if app is in background
-                                        Log.d(NOTIFICATION_TAG, "NEW");
-                                        updateLastMessageReadTimestamp(friendlyMessage.getTimestamp());
-                                        createNotification(friendlyMessage.getName(), friendlyMessage.getText() + "NEW" + Boolean.toString(getIsChatAppForeground()), currentJob);
-                                    }
-                                } else{
-                                    //TO DO: Show notification if only if app is in foreground
-                                    Log.d(NOTIFICATION_TAG, "For another job");
-                                    createNotification(friendlyMessage.getName(), friendlyMessage.getText() + "ANOTHER JOB" + Boolean.toString(getIsChatAppForeground()), currentJob);
-                                }
-                            }
-                        }
-                    }*/
                 }
-
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 }
-
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
                 }
-
                 @Override
                 public void onChildMoved(DataSnapshot dataSnapshot, String s) {
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
@@ -378,7 +340,7 @@ public class ChatActivity extends AppCompatActivity {
                         Uri downloadUrl = taskSnapshot.getDownloadUrl();
                         FriendlyMessage friendlyMessage = null;
                         if (downloadUrl != null) {
-                            friendlyMessage = new FriendlyMessage(null, mUsername, downloadUrl.toString(), currentUser.getUid(), System.currentTimeMillis(), currentJob.getJobId());
+                            friendlyMessage = new FriendlyMessage(null, mUsername, downloadUrl.toString(), currentUser.getUid(), System.currentTimeMillis(), currentJob.getJobId(), 1);
                         }
                         chatDatabaseReference.push().setValue(friendlyMessage);
                     }
