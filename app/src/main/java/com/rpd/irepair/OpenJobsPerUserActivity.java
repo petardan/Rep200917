@@ -91,6 +91,7 @@ public class OpenJobsPerUserActivity extends AppCompatActivity {
     }
 
     private void detachDatabaseReadListener(){
+        //Remove all database related elements
         if(jobsperuserChildEventListener != null){
             jobsperuserDatabaseReference.removeEventListener(jobsperuserChildEventListener);
             jobsperuserChildEventListener = null;
