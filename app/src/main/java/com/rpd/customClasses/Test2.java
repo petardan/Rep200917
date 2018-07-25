@@ -1,4 +1,4 @@
 package com.rpd.customClasses;
 
-public class Test {
+public class Test2 {
 }
