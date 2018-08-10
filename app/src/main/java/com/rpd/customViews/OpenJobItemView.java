@@ -1,6 +1,8 @@
 package com.rpd.customViews;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -12,6 +14,10 @@ import android.widget.TextView;
 import com.rpd.customClasses.Job;
 import com.rpd.irepair.OpenJobsPerUserActivity;
 import com.rpd.irepair.R;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -28,6 +34,8 @@ public class OpenJobItemView extends RelativeLayout{
 
     OpenJobsPerUserActivity currentActivity;
 
+    SharedPreferences chatPrefs;
+
     Job job;
 
     public Job getJob() {
@@ -40,6 +48,11 @@ public class OpenJobItemView extends RelativeLayout{
 
     public OpenJobItemView(final Context context, final Job job){
         super(context);
+
+        setJob(job);
+
+        chatPrefs = getContext().getSharedPreferences("chat_prefs", Activity.MODE_PRIVATE);
+
         init();
 
         //Get current activity from context
@@ -70,11 +83,13 @@ public class OpenJobItemView extends RelativeLayout{
 
     private void init() {
         inflate(getContext(), R.layout.item_open_job, this);
-        this.jobTitle = (TextView)findViewById(R.id.jobTitle);
-        this.repairmanImageView = (ImageView)findViewById(R.id.repairmanImageView);
-        this.closeImageView = (ImageView)findViewById(R.id.closeImageView);
-        this.infoImageView = (ImageView)findViewById(R.id.infoImageView);
-        this.chatImageView = (ImageView)findViewById(R.id.chatImageView);
+        this.jobTitle = findViewById(R.id.jobTitle);
+        this.repairmanImageView = findViewById(R.id.repairmanImageView);
+        this.closeImageView = findViewById(R.id.closeImageView);
+        this.infoImageView = findViewById(R.id.infoImageView);
+        this.chatImageView = findViewById(R.id.chatImageView);
+
+
     }
 
     public void setNewMessageReceivedAlert() {
@@ -84,6 +99,24 @@ public class OpenJobItemView extends RelativeLayout{
 
     public void setAllMessageRead() {
         jobTitle.setTextColor(ContextCompat.getColor(currentActivity.getApplicationContext(), R.color.colorPrimaryDark));
+        removeJobIDFromUnreadMessages(job.getJobId());
+    }
 
+    private void removeJobIDFromUnreadMessages(String jobID) {
+        Set<String> set = chatPrefs.getStringSet("UNREAD_MESSAGE_JOBID", null);
+        if (set != null){
+            ArrayList<String> arrayFromSet = new ArrayList<>(set);
+            for (int i=0; i<arrayFromSet.size(); i++){
+                if (arrayFromSet.get(i).equalsIgnoreCase(jobID)){
+                    arrayFromSet.remove(i);
+                }
+            }
+            //After jobID is removed, add new array into shared prefs
+            SharedPreferences.Editor editor = chatPrefs.edit();
+            Set<String> newSet = new HashSet<>();
+            set.addAll(arrayFromSet);
+            editor.putStringSet("UNREAD_MESSAGE_JOBID", newSet);
+            editor.apply();
+        }
     }
 }

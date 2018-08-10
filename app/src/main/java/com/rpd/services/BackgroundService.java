@@ -28,7 +28,9 @@ import com.rpd.irepair.ChatActivity;
 import com.rpd.irepair.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class BackgroundService extends Service
@@ -49,10 +51,13 @@ public class BackgroundService extends Service
 
     SharedPreferences chatPrefs;
 
-    String jobID = "1513981715655";
+    String jobID = "1513981236565";
 
     //All user's open jobs
     ArrayList<Job> jobs;
+
+    //Unread messages jobID array
+    ArrayList<String> unreadMessagesJobIDArray;
     //Database References for open jobs
     ArrayList<DatabaseReference> jobsDBRefs;
     ArrayList<ChildEventListener> jobsDBListeners;
@@ -72,6 +77,7 @@ public class BackgroundService extends Service
         chatPrefs = getSharedPreferences("chat_prefs", Activity.MODE_PRIVATE);
 
         jobs = new ArrayList<>();
+        unreadMessagesJobIDArray = new ArrayList<>();
         jobsDBRefs = new ArrayList<>();
         jobsDBListeners = new ArrayList<>();
 
@@ -171,6 +177,13 @@ public class BackgroundService extends Service
                                     Log.d(NOTIFICATION_TAG, "NEW");
                                     updateLastMessageReadTimestamp(friendlyMessage.getTimestamp());
                                     createNotification(friendlyMessage.getName(), friendlyMessage.getText() + "NEW", openJob);
+                                    addMessageJobToUnreadArray(openJob);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("FRIENDLY_MESSAGE", friendlyMessage);
+                                    Intent i = new Intent("NEW_MESSAGE_RECEIVED");
+                                    i.putExtras(bundle);
+                                    i.putExtra("TEST", "test");
+                                    sendBroadcast(i);
                                 }
                             }
                     }
@@ -190,6 +203,38 @@ public class BackgroundService extends Service
         };
         jobsDBListeners.add(chatDatabaseListenerForOpenJob);
         chatDatabaseReferenceForOpenJob.addChildEventListener(chatDatabaseListenerForOpenJob);
+    }
+
+    private void addMessageJobToUnreadArray(Job openJob) {
+        //Retrieve unread message's jobID from the array in SharedPrefs
+        unreadMessagesJobIDArray = getUnreadMessagesJobIDFromSharedPrefs();
+
+        for (int i =0; i<unreadMessagesJobIDArray.size(); i++){
+            Log.d("UNREADSET", unreadMessagesJobIDArray.get(i));
+        }
+
+        if (unreadMessagesJobIDArray.contains(openJob.getJobId())){
+            //JobID already in the list
+        } else {
+            unreadMessagesJobIDArray.add(openJob.getJobId());
+            SharedPreferences.Editor editor = chatPrefs.edit();
+            Set<String> set = new HashSet<String>();
+            set.addAll(unreadMessagesJobIDArray);
+            editor.putStringSet("UNREAD_MESSAGE_JOBID", set);
+            editor.apply();
+
+        }
+
+    }
+
+    private ArrayList<String> getUnreadMessagesJobIDFromSharedPrefs() {
+        Set<String> set = chatPrefs.getStringSet("UNREAD_MESSAGE_JOBID", null);
+        ArrayList<String> arrayFromSet = new ArrayList<>();
+        if (set != null){
+            arrayFromSet.addAll(set);
+        }
+
+        return arrayFromSet;
     }
 
     private void onSignOutCleanup() {

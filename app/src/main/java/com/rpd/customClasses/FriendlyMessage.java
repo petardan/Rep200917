@@ -1,10 +1,12 @@
 package com.rpd.customClasses;
 
+import java.io.Serializable;
+
 /**
  * Created by Petar on 1/10/2018.
  */
 
-public class FriendlyMessage {
+public class FriendlyMessage implements Serializable{
 
     private String text;
     private String name;
