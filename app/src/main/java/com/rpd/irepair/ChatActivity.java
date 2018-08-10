@@ -43,8 +43,10 @@ import com.rpd.customClasses.FriendlyMessage;
 import com.rpd.customClasses.Job;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class ChatActivity extends AppCompatActivity {
@@ -105,6 +107,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         chatPrefs = getSharedPreferences("chat_prefs", Activity.MODE_PRIVATE);
+        removeJobIDFromUnreadMessages(jobID);
 
         setIsChatAppForeground(true, jobID);
 
@@ -398,5 +401,23 @@ public class ChatActivity extends AppCompatActivity {
         editor.putBoolean("ISAPPFOREGROUND", isAppForeground);
         editor.putString("APPFOREGROUNDJOBID", jobID);
         editor.apply();
+    }
+
+    private void removeJobIDFromUnreadMessages(String jobID) {
+        Set<String> set = chatPrefs.getStringSet("UNREAD_MESSAGE_JOBID", null);
+        if (set != null){
+            ArrayList<String> arrayFromSet = new ArrayList<>(set);
+            for (int i=0; i<arrayFromSet.size(); i++){
+                if (arrayFromSet.get(i).equalsIgnoreCase(jobID)){
+                    arrayFromSet.remove(i);
+                }
+            }
+            //After jobID is removed, add new array into shared prefs
+            SharedPreferences.Editor editor = chatPrefs.edit();
+            Set<String> newSet = new HashSet<>();
+            set.addAll(arrayFromSet);
+            editor.putStringSet("UNREAD_MESSAGE_JOBID", newSet);
+            editor.apply();
+        }
     }
 }

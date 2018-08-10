@@ -35,12 +35,17 @@
         <activity android:name=".OpenJobsPerUserActivity" />
         <activity android:name=".ChatActivity" />
 
+        <!-- Broadcaster Receiver for broadcasting received message to other activities -->
+        <receiver android:name="com.rpd.broadcastReceivers.ActivityReceiver">
+        </receiver>
+
         <!-- Broadcast receiver that wakes the service after boot-->
-        <receiver android:name="com.rpd.broadcastReceivers.iRepairBootReceiver">
+        <receiver android:name="com.rpd.broadcastReceivers.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
 
         <!-- iRepair Background Service-->
         <service android:name="com.rpd.services.BackgroundService" android:enabled="true"/>

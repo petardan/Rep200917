@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.rpd.services.BackgroundService;
 
-public class iRepairBootReceiver extends BroadcastReceiver {
+public class BootReceiver extends BroadcastReceiver {
 
     String TAG = "iRepairBroadcastReceiver";
 
