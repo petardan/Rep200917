@@ -36,6 +36,8 @@ public class OpenJobItemView extends RelativeLayout{
 
     SharedPreferences chatPrefs;
 
+    SharedPreferences chatPrefs;
+
     Job job;
 
     public Job getJob() {
