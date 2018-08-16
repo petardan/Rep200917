@@ -12,7 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rpd.customClasses.Job;
-import com.rpd.irepair.OpenedJobsPerUserActivity;
+import com.rpd.irepair.ConfirmedJobsPerUserActivity;
+import com.rpd.irepair.ConfirmedJobsPerUserActivity;
 import com.rpd.irepair.R;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.Set;
  * Created by Petar on 12/26/2017.
  */
 
-public class OpenJobItemView extends RelativeLayout{
+public class ConfirmedJobItemView extends RelativeLayout{
 
     TextView jobTitle;
     ImageView repairmanImageView;
@@ -32,7 +33,7 @@ public class OpenJobItemView extends RelativeLayout{
     ImageView infoImageView;
     ImageView chatImageView;
 
-    OpenedJobsPerUserActivity currentActivity;
+    ConfirmedJobsPerUserActivity currentActivity;
 
     SharedPreferences chatPrefs;
 
@@ -46,7 +47,7 @@ public class OpenJobItemView extends RelativeLayout{
         this.job = job;
     }
 
-    public OpenJobItemView(final Context context, final Job job){
+    public ConfirmedJobItemView(final Context context, final Job job){
         super(context);
 
         setJob(job);
@@ -56,9 +57,9 @@ public class OpenJobItemView extends RelativeLayout{
         init();
 
         //Get current activity from context
-        currentActivity = (OpenedJobsPerUserActivity)context;
+        currentActivity = (ConfirmedJobsPerUserActivity)context;
 
-        //Initialize job openJobViewItem elements
+        //Initialize job confirmedJobViewItem elements
         jobTitle.setText(job.getJobTitle());
         jobTitle.setTextColor(ContextCompat.getColor(currentActivity.getApplicationContext(), R.color.colorPrimaryDark));
 
@@ -89,7 +90,7 @@ public class OpenJobItemView extends RelativeLayout{
 
 
     private void init() {
-        inflate(getContext(), R.layout.item_open_job, this);
+        inflate(getContext(), R.layout.item_confirm_job, this);
         this.jobTitle = findViewById(R.id.jobTitle);
         this.repairmanImageView = findViewById(R.id.repairmanImageView);
         this.closeImageView = findViewById(R.id.closeImageView);
@@ -100,7 +101,7 @@ public class OpenJobItemView extends RelativeLayout{
     }
 
     public void setNewMessageReceivedAlert() {
-        Log.d("OpenJobItem","New Message Received");
+        Log.d("ConfirmedJobItem","New Message Received");
         jobTitle.setTextColor(Color.RED);
     }
 

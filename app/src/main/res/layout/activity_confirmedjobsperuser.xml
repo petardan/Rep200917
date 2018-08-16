@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rpd.irepair.CanceledJobsPerUserActivity"
+    tools:context="com.rpd.irepair.ConfirmedJobsPerUserActivity"
     android:padding="5sp"
-    android:background="#d61500">
+    android:background="#e8e67f">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/canceledJobsLinearLayout"
+            android:id="@+id/confirmedJobsLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
