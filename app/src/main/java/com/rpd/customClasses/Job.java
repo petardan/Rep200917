@@ -20,11 +20,13 @@ public class Job implements Serializable {
     String userEmail;
     String userPhone;
     String jobStatus; //1- Open, 2 - Confirmed, 3 - Finished, 4 - Cancelled
+    String jobConfirmedBy; //Possible values: none, user, repairman or both
+    String jobCancelledBy; //Possible values: none, user or repairman
 
     public Job() {
     }
 
-    public Job(String jobId, String repairmanId, String userId, String jobTitle, String jobDesciption, String jobSeverity, String jobStartDate, String jobEndDate, String userAddress, String userEmail, String userPhone, String jobStatus) {
+    public Job(String jobId, String repairmanId, String userId, String jobTitle, String jobDesciption, String jobSeverity, String jobStartDate, String jobEndDate, String userAddress, String userEmail, String userPhone, String jobStatus, String jobConfirmedBy, String jobCancelledBy) {
         this.jobId = jobId;
         this.repairmanId = repairmanId;
         this.userId = userId;
@@ -37,6 +39,8 @@ public class Job implements Serializable {
         this.userEmail = userEmail;
         this.userPhone = userPhone;
         this.jobStatus = jobStatus;
+        this.jobConfirmedBy = jobConfirmedBy;
+        this.jobCancelledBy = jobCancelledBy;
     }
 
     public String getJobId() {
@@ -133,5 +137,21 @@ public class Job implements Serializable {
 
     public void setJobStatus(String jobStatus) {
         this.jobStatus = jobStatus;
+    }
+
+    public String getJobConfirmedBy() {
+        return jobConfirmedBy;
+    }
+
+    public void setJobConfirmedBy(String jobConfirmedBy) {
+        this.jobConfirmedBy = jobConfirmedBy;
+    }
+
+    public String getJobCancelledBy() {
+        return jobCancelledBy;
+    }
+
+    public void setJobCancelledBy(String jobCancelledBy) {
+        this.jobCancelledBy = jobCancelledBy;
     }
 }

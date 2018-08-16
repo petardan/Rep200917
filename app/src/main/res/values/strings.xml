@@ -43,7 +43,10 @@
     <string name="category_other">Other</string>
 
     <string name="category_myjobs_title">My jobs</string>
-    <string name="category_assigned_jobs">Assigned jobs</string>
+    <string name="category_opened_jobs">Assigned jobs</string>
+    <string name="category_confirmed_jobs">Confirmed jobs</string>
+    <string name="category_finished_jobs">Finished jobs</string>
+    <string name="category_canceled_jobs">Canceled jobs</string>
 
     <string name="category_settings_title">Settings</string>
     <string name="category_user_settings">User settings</string>

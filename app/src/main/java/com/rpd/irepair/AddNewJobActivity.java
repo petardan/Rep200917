@@ -271,7 +271,7 @@ public class AddNewJobActivity extends AppCompatActivity{
         //Define unique job id - current time in milliseconds
         long time= System.currentTimeMillis();
         jobId = Long.valueOf(time).toString();
-        job = new Job(getJobId(), getRepairmanId(), getUserId(), getJobTitle(), getJobDesciption(), getJobSeverity(), getJobStartDate(), getJobEndDate(), getUserAddress(), getUserEmail(), getUserPhone(), "1");
+        job = new Job(getJobId(), getRepairmanId(), getUserId(), getJobTitle(), getJobDesciption(), getJobSeverity(), getJobStartDate(), getJobEndDate(), getUserAddress(), getUserEmail(), getUserPhone(), "1", "none", "none");
 
         //Add job per user to database
         jobsperuserDatabaseReference.child(currentFirebaseUser.getUid()).child("open").child(getJobId()).setValue(job).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -296,7 +296,7 @@ public class AddNewJobActivity extends AppCompatActivity{
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(AddNewJobActivity.this, OpenJobsPerUserActivity.class));
+                    startActivity(new Intent(AddNewJobActivity.this, OpenedJobsPerUserActivity.class));
                     finish();
                 } else{
                     Toast.makeText(AddNewJobActivity.this, "Error adding job per repairman" + task.getException(),

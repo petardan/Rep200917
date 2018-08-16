@@ -4,19 +4,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.rpd.customClasses.FriendlyMessage;
-import com.rpd.irepair.OpenJobsPerUserActivity;
+import com.rpd.irepair.OpenedJobsPerUserActivity;
 
 public class ActivityReceiver extends BroadcastReceiver {
 
-    OpenJobsPerUserActivity currentActivity;
+    OpenedJobsPerUserActivity currentActivity;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        currentActivity = (OpenJobsPerUserActivity)context;
+        currentActivity = (OpenedJobsPerUserActivity)context;
 
         Bundle receive = intent.getExtras();
         //jobID = (String) receive.getString("JOBID");

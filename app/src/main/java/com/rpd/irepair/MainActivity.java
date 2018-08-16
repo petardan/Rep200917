@@ -551,8 +551,17 @@ public class MainActivity extends AppCompatActivity
         } else if(id == R.id.category_user_settings){
             Intent i = new Intent(MainActivity.this, UserProfileActivity.class);
             startActivity(i);
-        } else if (id == R.id.category_assigned_jobs){
-            Intent i = new Intent(MainActivity.this, OpenJobsPerUserActivity.class);
+        } else if (id == R.id.category_opened_jobs){
+            Intent i = new Intent(MainActivity.this, OpenedJobsPerUserActivity.class);
+            startActivity(i);
+        } else if (id == R.id.category_confirmed_jobs){
+            Intent i = new Intent(MainActivity.this, ConfirmedJobsPerUserActivity.class);
+            startActivity(i);
+        } else if (id == R.id.category_finished_jobs){
+            Intent i = new Intent(MainActivity.this, FinishedJobsPerUserActivity.class);
+            startActivity(i);
+        } else if (id == R.id.category_canceled_jobs){
+            Intent i = new Intent(MainActivity.this, CanceledJobsPerUserActivity.class);
             startActivity(i);
         }
         else {
