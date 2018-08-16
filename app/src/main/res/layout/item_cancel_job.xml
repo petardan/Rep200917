@@ -32,14 +32,6 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/closeImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
-
     <TextView
         android:id="@+id/jobTitle"
         android:layout_width="wrap_content"
@@ -76,24 +68,16 @@
         android:id="@+id/chatImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/jobStatus"
-        android:layout_centerHorizontal="true"
         app:srcCompat="@mipmap/ic_shortcut_chat" />
 
     <ImageView
         android:id="@+id/infoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/jobTitle"
         android:layout_below="@+id/jobStatus"
+        android:layout_toStartOf="@+id/chatImageView"
         app:srcCompat="@mipmap/ic_shortcut_info_outline" />
-
-    <ImageView
-        android:id="@+id/infoImageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/jobStatus"
-        app:srcCompat="@mipmap/ic_shortcut_check" />
 
 </RelativeLayout>

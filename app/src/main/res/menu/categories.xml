@@ -45,10 +45,25 @@
         android:orderInCategory="995">
         <menu>
             <item
-                android:id="@+id/category_assigned_jobs"
+                android:id="@+id/category_opened_jobs"
                 android:icon="@mipmap/ic_build_black_24dp"
-                android:title="@string/category_assigned_jobs"
+                android:title="@string/category_opened_jobs"
                 android:orderInCategory="996"/>
+            <item
+                android:id="@+id/category_confirmed_jobs"
+                android:icon="@mipmap/baseline_gavel_black_24"
+                android:title="@string/category_confirmed_jobs"
+                android:orderInCategory="997"/>
+            <item
+                android:id="@+id/category_finished_jobs"
+                android:icon="@mipmap/baseline_done_outline_black_24"
+                android:title="@string/category_finished_jobs"
+                android:orderInCategory="998"/>
+            <item
+                android:id="@+id/category_canceled_jobs"
+                android:icon="@mipmap/baseline_cancel_black_24"
+                android:title="@string/category_canceled_jobs"
+                android:orderInCategory="999"/>
 
         </menu>
     </item>

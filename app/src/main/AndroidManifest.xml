@@ -32,7 +32,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".UserProfileActivity" />
-        <activity android:name=".OpenJobsPerUserActivity" />
+        <activity android:name=".OpenedJobsPerUserActivity" />
+        <activity android:name=".ConfirmedJobsPerUserActivity" />
+        <activity android:name=".FinishedJobsPerUserActivity" />
+        <activity android:name=".CanceledJobsPerUserActivity" />
         <activity android:name=".ChatActivity" />
 
         <!-- Broadcaster Receiver for broadcasting received message to other activities -->
