@@ -2,17 +2,15 @@ package com.rpd.irepair;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,6 +49,8 @@ public class CanceledJobsPerUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canceledjobsperuser);
+
+        setActionBarTitleAndSubtitle("Canceled Jobs", "");
 
         chatPrefs = getSharedPreferences("chat_prefs", Activity.MODE_PRIVATE);
 
@@ -91,6 +91,13 @@ public class CanceledJobsPerUserActivity extends AppCompatActivity {
         jobsperuserDatabaseReference.addChildEventListener(jobsperuserChildEventListener);
     }
 
+    private void setActionBarTitleAndSubtitle(String title, String subtitle) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(title);
+        actionBar.setSubtitle(subtitle);
+
+    }
+
     private void addNewCanceledJobItem(Job job) {
         //First add job's database reference and listeners
         CanceledJobItemView canceledJobItemView = new CanceledJobItemView(this, job);
@@ -118,7 +125,7 @@ public class CanceledJobsPerUserActivity extends AppCompatActivity {
     public void showJobInfo(Job job) {
         final Dialog fbDialogue = new Dialog(CanceledJobsPerUserActivity.this, android.R.style.Theme_Black_NoTitleBar);
         Objects.requireNonNull(fbDialogue.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
-        fbDialogue.setContentView(R.layout.fragment_chat);
+        fbDialogue.setContentView(R.layout.fragment_info);
         fbDialogue.setCancelable(true);
         fbDialogue.show();
     }

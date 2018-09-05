@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.rpd.customClasses.Job;
 import com.rpd.irepair.ConfirmedJobsPerUserActivity;
-import com.rpd.irepair.ConfirmedJobsPerUserActivity;
 import com.rpd.irepair.R;
 
 import java.util.ArrayList;
@@ -28,10 +27,12 @@ import java.util.Set;
 public class ConfirmedJobItemView extends RelativeLayout{
 
     TextView jobTitle;
+    TextView jobStatus;
     ImageView repairmanImageView;
     ImageView closeImageView;
     ImageView infoImageView;
     ImageView chatImageView;
+    ImageView finishImageView;
 
     ConfirmedJobsPerUserActivity currentActivity;
 
@@ -62,6 +63,7 @@ public class ConfirmedJobItemView extends RelativeLayout{
         //Initialize job confirmedJobViewItem elements
         jobTitle.setText(job.getJobTitle());
         jobTitle.setTextColor(ContextCompat.getColor(currentActivity.getApplicationContext(), R.color.colorPrimaryDark));
+        setJobConfirmedByStatus(job.getJobConfirmedBy());
 
         chatImageView.setOnClickListener(new OnClickListener() {
             @Override
@@ -86,18 +88,25 @@ public class ConfirmedJobItemView extends RelativeLayout{
             }
         });
 
+        finishImageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentActivity.jobFinished(job);
+            }
+        });
+
     }
 
 
     private void init() {
-        inflate(getContext(), R.layout.item_confirm_job, this);
+        inflate(getContext(), R.layout.item_confirmed_job, this);
         this.jobTitle = findViewById(R.id.jobTitle);
         this.repairmanImageView = findViewById(R.id.repairmanImageView);
         this.closeImageView = findViewById(R.id.closeImageView);
         this.infoImageView = findViewById(R.id.infoImageView);
         this.chatImageView = findViewById(R.id.chatImageView);
-
-
+        this.jobStatus = findViewById(R.id.jobStatus);
+        this.finishImageView = findViewById(R.id.finishImageView);
     }
 
     public void setNewMessageReceivedAlert() {
@@ -126,5 +135,9 @@ public class ConfirmedJobItemView extends RelativeLayout{
             editor.putStringSet("UNREAD_MESSAGE_JOBID", newSet);
             editor.apply();
         }
+    }
+
+    public void setJobConfirmedByStatus(String confirmationStatus){
+        jobStatus.setText("Confirmed by " + confirmationStatus);
     }
 }

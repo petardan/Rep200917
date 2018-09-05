@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +27,6 @@ import com.rpd.broadcastReceivers.ActivityReceiver;
 import com.rpd.customClasses.FriendlyMessage;
 import com.rpd.customClasses.Job;
 import com.rpd.customViews.ConfirmedJobItemView;
-import com.rpd.customViews.OpenJobItemView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -59,6 +59,8 @@ public class ConfirmedJobsPerUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmedjobsperuser);
+
+        setActionBarTitleAndSubtitle("Confirmed Jobs", "");
 
         //clearNotifications();
 
@@ -116,6 +118,13 @@ public class ConfirmedJobsPerUserActivity extends AppCompatActivity {
         jobsperuserDatabaseReference.addChildEventListener(jobsperuserChildEventListener);
     }
 
+    private void setActionBarTitleAndSubtitle(String title, String subtitle) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(title);
+        actionBar.setSubtitle(subtitle);
+
+    }
+
     private ArrayList<String> getUnreadMessagesJobIDFromSharedPrefs() {
         Set<String> set = chatPrefs.getStringSet("UNREAD_MESSAGE_JOBID", null);
         ArrayList<String> arrayFromSet = new ArrayList<>();
@@ -169,7 +178,7 @@ public class ConfirmedJobsPerUserActivity extends AppCompatActivity {
     public void showJobInfo(Job job) {
         final Dialog fbDialogue = new Dialog(ConfirmedJobsPerUserActivity.this, android.R.style.Theme_Black_NoTitleBar);
         Objects.requireNonNull(fbDialogue.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
-        fbDialogue.setContentView(R.layout.fragment_chat);
+        fbDialogue.setContentView(R.layout.fragment_info);
         fbDialogue.setCancelable(true);
         fbDialogue.show();
     }
@@ -208,23 +217,40 @@ public class ConfirmedJobsPerUserActivity extends AppCompatActivity {
     }
 
     public void cancelJob(Job job) {
-        for (int i=0; i<confirmJobItemViews.size(); i++){
+        String jobId = job.getJobId();
+        try {
+            jobsperuserDatabaseReference.child(jobId).child("jobStatus").setValue("4");
+            jobsperuserDatabaseReference.child(jobId).child("jobCancelledBy").setValue("user");
+            removeViewBasedOnJobID(jobId);
+            Toast.makeText(this, "Job canceled! Check cancelled job for details", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(ConfirmedJobsPerUserActivity.this, CanceledJobsPerUserActivity.class);
+            startActivity(i);
+            finish();
+        } catch (Exception e){
+            Toast.makeText(this, "Job is not canceled!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void removeViewBasedOnJobID(String jobID){
+        for (int i = 0; i< confirmJobItemViews.size(); i++){
             ConfirmedJobItemView cjiv = confirmJobItemViews.get(i);
-            //Job jobFrom = ojiv.getJob();
-            if (cjiv.getJob().getJobId().equalsIgnoreCase(job.getJobId())){
-                changeStatusOnCanceledMessage(job.getJobId());
+            if (cjiv.getJob().getJobId().equalsIgnoreCase(jobID)){
                 cjiv.setVisibility(View.GONE);
             }
         }
     }
 
-    private void changeStatusOnCanceledMessage(String jobId) {
+    public void jobFinished(Job job) {
+        String jobId = job.getJobId();
         try {
-            jobsperuserDatabaseReference.child(jobId).child("jobStatus").setValue("4");
-            jobsperuserDatabaseReference.child(jobId).child("jobCancelledBy").setValue("user");
-            Toast.makeText(this, "Job canceled! Check cancelled job for details", Toast.LENGTH_LONG).show();
+            jobsperuserDatabaseReference.child(jobId).child("jobStatus").setValue("3");
+            removeViewBasedOnJobID(jobId);
+            Toast.makeText(this, "Job done!", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(ConfirmedJobsPerUserActivity.this, FinishedJobsPerUserActivity.class);
+            startActivity(i);
+            finish();
         } catch (Exception e){
-            Toast.makeText(this, "Job is not canceled!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Job is not finished!", Toast.LENGTH_LONG).show();
         }
     }
 }

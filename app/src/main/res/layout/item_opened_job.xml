@@ -32,6 +32,14 @@
 
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/closeImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
     <TextView
         android:id="@+id/jobTitle"
         android:layout_width="wrap_content"
@@ -46,7 +54,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/jobStatusVIew"
+        android:id="@+id/jobStatusView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/jobTitle"
@@ -60,24 +68,32 @@
         android:id="@+id/jobStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/jobStatusVIew"
-        android:layout_below="@+id/jobStatusVIew"
+        android:layout_alignStart="@+id/jobStatusView"
+        android:layout_below="@+id/jobStatusView"
         android:text="@string/open_job_status" />
 
     <ImageView
         android:id="@+id/chatImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/jobStatus"
+        android:layout_centerHorizontal="true"
         app:srcCompat="@mipmap/ic_shortcut_chat" />
 
     <ImageView
         android:id="@+id/infoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/jobTitle"
         android:layout_below="@+id/jobStatus"
-        android:layout_toStartOf="@+id/chatImageView"
         app:srcCompat="@mipmap/ic_shortcut_info_outline" />
+
+    <ImageView
+        android:id="@+id/confirmImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/jobStatus"
+        app:srcCompat="@mipmap/ic_shortcut_check" />
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rpd.broadcastReceivers.ActivityReceiver;
 import com.rpd.customClasses.FriendlyMessage;
 import com.rpd.customClasses.Job;
-import com.rpd.customViews.OpenJobItemView;
+import com.rpd.customViews.OpenedJobItemView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -44,7 +45,7 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
 
     LinearLayout openJobsLinearLayout;
 
-    ArrayList<OpenJobItemView> openJobItemViews;
+    ArrayList<OpenedJobItemView> openedJobItemViews;
 
     //Unread messages jobID array
     ArrayList<String> unreadMessagesJobIDArray;
@@ -60,6 +61,8 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_openedjobsperuser);
 
+        setActionBarTitleAndSubtitle("Opened Jobs", "");
+
         clearNotifications();
 
         openJobChatPrefs = getSharedPreferences("open_jobs_chat_prefs", Activity.MODE_PRIVATE);
@@ -70,7 +73,7 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
         this.registerReceiver(messageReceiver, filter);
 
         //Initialize openJobItemViews array list
-        openJobItemViews = new ArrayList<>();
+        openedJobItemViews = new ArrayList<>();
 
         //Get all unread messages job id
         unreadMessagesJobIDArray = new ArrayList<>();
@@ -117,6 +120,13 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
         jobsperuserDatabaseReference.addChildEventListener(jobsperuserChildEventListener);
     }
 
+    private void setActionBarTitleAndSubtitle(String title, String subtitle) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(title);
+        actionBar.setSubtitle(subtitle);
+
+    }
+
     private ArrayList<String> getUnreadMessagesJobIDFromSharedPrefs() {
         Set<String> set = chatPrefs.getStringSet("UNREAD_MESSAGE_JOBID", null);
         ArrayList<String> arrayFromSet = new ArrayList<>();
@@ -133,12 +143,12 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
 
     private void addNewOpenJobItem(Job job) {
         //First add job's database reference and listeners
-        OpenJobItemView openJobItemView = new OpenJobItemView(this, job);
+        OpenedJobItemView openedJobItemView = new OpenedJobItemView(this, job);
         if(jobHasUnreadMessages(job)){
-            openJobItemView.setNewMessageReceivedAlert();
+            openedJobItemView.setNewMessageReceivedAlert();
         }
-        openJobItemViews.add(openJobItemView);
-        openJobsLinearLayout.addView(openJobItemView);
+        openedJobItemViews.add(openedJobItemView);
+        openJobsLinearLayout.addView(openedJobItemView);
     }
 
     private boolean jobHasUnreadMessages(Job job) {
@@ -170,7 +180,7 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
     public void showJobInfo(Job job) {
         final Dialog fbDialogue = new Dialog(OpenedJobsPerUserActivity.this, android.R.style.Theme_Black_NoTitleBar);
         Objects.requireNonNull(fbDialogue.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
-        fbDialogue.setContentView(R.layout.fragment_chat);
+        fbDialogue.setContentView(R.layout.fragment_info);
         fbDialogue.setCancelable(true);
         fbDialogue.show();
     }
@@ -194,8 +204,8 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
         Toast.makeText(this, "Activity broadcast receiver called !" + message.getText(),
                 Toast.LENGTH_LONG).show();
 
-        for (int i=0; i<openJobItemViews.size(); i++){
-            OpenJobItemView ojiv = openJobItemViews.get(i);
+        for (int i = 0; i< openedJobItemViews.size(); i++){
+            OpenedJobItemView ojiv = openedJobItemViews.get(i);
             Job job = ojiv.getJob();
             if (job.getJobId().equalsIgnoreCase(message.getJobID())){
                 ojiv.setNewMessageReceivedAlert();
@@ -209,23 +219,64 @@ public class OpenedJobsPerUserActivity extends AppCompatActivity {
     }
 
     public void cancelJob(Job job) {
-        for (int i=0; i<openJobItemViews.size(); i++){
-            OpenJobItemView ojiv = openJobItemViews.get(i);
-            //Job jobFrom = ojiv.getJob();
-            if (ojiv.getJob().getJobId().equalsIgnoreCase(job.getJobId())){
-                changeStatusOnCanceledMessage(job.getJobId());
+        String jobId = job.getJobId();
+        try {
+            jobsperuserDatabaseReference.child(jobId).child("jobStatus").setValue("4");
+            jobsperuserDatabaseReference.child(jobId).child("jobCancelledBy").setValue("user");
+            removeViewBasedOnJobID(jobId);
+            Toast.makeText(this, "Job canceled! Check cancelled job for details", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(OpenedJobsPerUserActivity.this, CanceledJobsPerUserActivity.class);
+            startActivity(i);
+            finish();
+        } catch (Exception e){
+            Toast.makeText(this, "Job is not canceled!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void jobConfirmedByUser(Job job) {
+        String jobId = job.getJobId();
+        //Check if job is already confirmed by the repairman. If yes, change job status and move to Confirmed jobs
+        if (job.getJobConfirmedBy().equalsIgnoreCase("repairman")){
+            try {
+                jobsperuserDatabaseReference.child(jobId).child("jobStatus").setValue("2");
+                jobsperuserDatabaseReference.child(jobId).child("jobConfirmedBy").setValue("both");
+                removeViewBasedOnJobID(jobId);
+                Toast.makeText(this, "Job confirmed! Check confirmed job for details", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(OpenedJobsPerUserActivity.this, ConfirmedJobsPerUserActivity.class);
+                startActivity(i);
+                finish();
+            } catch (Exception e){
+                Toast.makeText(this, "Job is not confirmed!", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            try {
+                jobsperuserDatabaseReference.child(jobId).child("jobConfirmedBy").setValue("user");
+                setJobViewStatusTextBasedOnJobID(jobId, "user. Please wait confirmation from the repairman.");
+                Toast.makeText(this, "Job confirmed! Wait confirmation from the repairman", Toast.LENGTH_LONG).show();
+            } catch (Exception e){
+                Toast.makeText(this, "Job is not confirmed!", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void removeViewBasedOnJobID(String jobID){
+        for (int i = 0; i< openedJobItemViews.size(); i++){
+            OpenedJobItemView ojiv = openedJobItemViews.get(i);
+            if (ojiv.getJob().getJobId().equalsIgnoreCase(jobID)){
                 ojiv.setVisibility(View.GONE);
             }
         }
     }
 
-    private void changeStatusOnCanceledMessage(String jobId) {
-        try {
-            jobsperuserDatabaseReference.child(jobId).child("jobStatus").setValue("4");
-            jobsperuserDatabaseReference.child(jobId).child("jobCancelledBy").setValue("user");
-            Toast.makeText(this, "Job canceled! Check cancelled job for details", Toast.LENGTH_LONG).show();
-        } catch (Exception e){
-            Toast.makeText(this, "Job is not canceled!", Toast.LENGTH_LONG).show();
+    public void setJobViewStatusTextBasedOnJobID(String jobID, String confirmedBy){
+        //This is called when only user or repairman has confirmed the job, not both
+        for (int i = 0; i< openedJobItemViews.size(); i++){
+            OpenedJobItemView ojiv = openedJobItemViews.get(i);
+            if (ojiv.getJob().getJobId().equalsIgnoreCase(jobID)){
+                ojiv.setJobConfirmedByStatus(confirmedBy);
+            }
         }
     }
+
+
 }
