@@ -132,7 +132,7 @@ public class FinishedJobsPerUserActivity extends AppCompatActivity {
         super.onPause();
         detachDatabaseReadListener();
         Log.d("Notification", "App is in background");
-    }
+    } 
 
     @Override
     protected void onResume() {
