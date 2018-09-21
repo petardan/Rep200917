@@ -12,7 +12,7 @@ public class Region implements Serializable{
     String name;
     String cityName;
 
-    public Region() { 
+    public Region() {
     }
 
     public Region(String id, String name, String cityName) {
