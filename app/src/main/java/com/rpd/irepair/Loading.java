@@ -88,6 +88,14 @@ public class Loading extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
                     Toast.makeText(context, "Welcome "+user.getDisplayName(), Toast.LENGTH_LONG).show();
+                    //Countdown timer that performs login check after animation is done (3sec)
+                    timer = new CountDownTimer(3000, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                        }
+                        public void onFinish() {
+                            checkingForUpdate();
+                        }
+                    }.start();
                 }
                 else {
                     Intent i = new Intent(Loading.this, LoginActivity.class);
@@ -98,14 +106,7 @@ public class Loading extends AppCompatActivity {
             }
         };
 
-        //Countdown timer that performs login check after animation is done (3sec)
-        timer = new CountDownTimer(3000, 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
-            public void onFinish() {
-                checkingForUpdate();
-            }
-        }.start();
+
 
 
     }

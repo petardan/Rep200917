@@ -43,7 +43,7 @@ public class CanceledJobsPerUserActivity extends AppCompatActivity {
     //Unread messages jobID array
     ArrayList<String> unreadMessagesJobIDArray;
 
-    SharedPreferences chatPrefs; 
+    SharedPreferences chatPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
