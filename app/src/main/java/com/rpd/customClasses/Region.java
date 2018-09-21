@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Region implements Serializable{
 
     String id;
-    String name; 
+    String name;  
     String cityName;
 
     public Region() {
