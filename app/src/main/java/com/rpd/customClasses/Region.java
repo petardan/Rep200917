@@ -18,7 +18,7 @@ public class Region implements Serializable{
     public Region(String id, String name, String cityName) {
         this.id = id;
         this.name = name;
-        this.cityName = cityName; 
+        this.cityName = cityName;
     }
 
 
