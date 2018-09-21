@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-
     <application
         android:name="com.rpd.volley.AppController"
         android:allowBackup="true"
@@ -39,20 +38,21 @@
         <activity android:name=".ChatActivity" />
 
         <!-- Broadcaster Receiver for broadcasting received message to other activities -->
-        <receiver android:name="com.rpd.broadcastReceivers.ActivityReceiver">
-        </receiver>
+        <receiver android:name="com.rpd.broadcastReceivers.ActivityReceiver"></receiver>
 
-        <!-- Broadcast receiver that wakes the service after boot-->
+        <!-- Broadcast receiver that wakes the service after boot -->
         <receiver android:name="com.rpd.broadcastReceivers.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
+        <!-- iRepair Background Service -->
+        <service
+            android:name="com.rpd.services.BackgroundService"
+            android:enabled="true" />
 
-        <!-- iRepair Background Service-->
-        <service android:name="com.rpd.services.BackgroundService" android:enabled="true"/>
-
+        <activity android:name=".RepairmanSignupActivity"></activity>
     </application>
 
 </manifest>
