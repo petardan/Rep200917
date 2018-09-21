@@ -14,6 +14,7 @@
     <string name="btn_login">LOGIN</string>
     <string name="btn_link_to_register">Not a member? Sign up now.</string>
     <string name="backgroundLogoDesc">iRepair Logo</string>
+    <string name="btn_link_to_repairman_signup">Are you a repairman? Sign up here.</string>
 
     <!--Register strings-->
     <string name="defaultUSerImageDesc">Image</string>
